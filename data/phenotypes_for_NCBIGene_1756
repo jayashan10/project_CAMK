@@ -1,0 +1,80 @@
+id 	 name
+HP:0003115 	 Abnormal EKG
+HP:0012086 	 Abnormal urinary color
+HP:0002814 	 Abnormality of the lower limb
+HP:0001435 	 Abnormality of the shoulder girdle musculature
+HP:0030097 	 Absent muscle dystrophin expression
+HP:0001771 	 Achilles tendon contracture
+HP:0003581 	 Adult onset
+HP:0011675 	 Arrhythmia
+HP:0008981 	 Calf muscle hypertrophy
+HP:0003707 	 Calf muscle pseudohypertrophy
+HP:0001638 	 Cardiomyopathy
+HP:0011463 	 Childhood onset
+HP:0100543 	 Cognitive impairment
+HP:0001635 	 Congestive heart failure
+HP:0002194 	 Delayed gross motor development
+HP:0000750 	 Delayed speech and language development
+HP:0003551 	 Difficulty climbing stairs
+HP:0001644 	 Dilated cardiomyopathy
+HP:0003409 	 Distal sensory impairment of all modalities
+HP:0003457 	 EMG abnormality
+HP:0000969 	 Edema
+HP:0002987 	 Elbow flexion contracture
+HP:0003236 	 Elevated circulating creatine kinase concentration
+HP:0002910 	 Elevated circulating hepatic transaminase concentration
+HP:0003546 	 Exercise intolerance
+HP:0003710 	 Exercise-induced muscle cramps
+HP:0002875 	 Exertional dyspnea
+HP:0002527 	 Falls
+HP:0002380 	 Fasciculations
+HP:0012378 	 Fatigue
+HP:0001371 	 Flexion contracture
+HP:0001288 	 Gait disturbance
+HP:0003324 	 Generalized muscle weakness
+HP:0001263 	 Global developmental delay
+HP:0003391 	 Gowers sign
+HP:0003089 	 Hamstring contractures
+HP:0003307 	 Hyperlordosis
+HP:0001265 	 Hyporeflexia
+HP:0001252 	 Hypotonia
+HP:0002791 	 Hypoventilation
+HP:0002540 	 Inability to walk
+HP:0032232 	 Increased circulating creatine kinase MB isoform
+HP:0033755 	 Increased left ventricular end-diastolic volume
+HP:0003557 	 Increased variability in muscle fiber diameter
+HP:0003621 	 Juvenile onset
+HP:0006380 	 Knee flexion contracture
+HP:0001712 	 Left ventricular hypertrophy
+HP:0025169 	 Left ventricular systolic dysfunction
+HP:0100578 	 Lipoatrophy
+HP:0002505 	 Loss of ambulation
+HP:0002938 	 Lumbar hyperlordosis
+HP:0001270 	 Motor delay
+HP:0003394 	 Muscle spasm
+HP:0001324 	 Muscle weakness
+HP:0003560 	 Muscular dystrophy
+HP:0003326 	 Myalgia
+HP:0002913 	 Myoglobinuria
+HP:0003198 	 Myopathy
+HP:0002870 	 Obstructive sleep apnea
+HP:0012764 	 Orthopnea
+HP:0001763 	 Pes planus
+HP:0003323 	 Progressive muscle weakness
+HP:0003701 	 Proximal muscle weakness
+HP:0003731 	 Quadriceps muscle weakness
+HP:0002878 	 Respiratory failure
+HP:0002093 	 Respiratory insufficiency
+HP:0002747 	 Respiratory insufficiency due to muscle weakness
+HP:0002091 	 Restrictive ventilatory defect
+HP:0002650 	 Scoliosis
+HP:0000407 	 Sensorineural hearing impairment
+HP:0003202 	 Skeletal muscle atrophy
+HP:0001328 	 Specific learning disability
+HP:0002942 	 Thoracic kyphosis
+HP:0002943 	 Thoracic scoliosis
+HP:0001727 	 Thromboembolic stroke
+HP:0030051 	 Tip-toe gait
+HP:0002515 	 Waddling gait
+HP:0001417 	 X-linked inheritance
+HP:0001419 	 X-linked recessive inheritance

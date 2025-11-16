@@ -20,25 +20,75 @@ This is a knowledge graph-driven clinical decision support system for rare muscu
 ## Development Setup
 
 ### Python Environment
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On macOS/Linux
-# venv\Scripts\activate  # On Windows
 
-# Install dependencies
-pip install -r requirements.txt  # (when available)
+**Using uv (Recommended):**
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create virtual environment
+uv venv
+source .venv/bin/activate  # On macOS/Linux
+# .venv\Scripts\activate  # On Windows
+
+# Install dependencies from pyproject.toml (creates/updates uv.lock)
+uv sync
+
+# Or install dependencies directly
+uv pip install neo4j pydantic python-dotenv
+
+# Install with dev dependencies (for notebooks)
+uv sync --extra dev
 ```
 
-### Neo4j Setup (Optional)
-The system works with or without Neo4j:
-- **With Neo4j:** Set environment variables `NEO4J_URI`, `NEO4J_USER`, `NEO4J_PASSWORD`, and optionally `NEO4J_DATABASE`
+**Alternative: Using pip:**
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install neo4j pydantic python-dotenv
+```
+
+**Dependencies:**
+- `neo4j>=5.0.0` - Neo4j Python driver for database connectivity
+- `pydantic>=2.0.0` - Data validation and settings management
+- `python-dotenv>=1.0.0` - Environment variable management from .env files
+
+### Neo4j Setup
+
+The project uses **Neo4j** with the **Monarch Initiative** knowledge graph database, which provides comprehensive biomedical knowledge including:
+- 1.3M+ nodes (diseases, genes, phenotypes, variants)
+- 14.7M+ relationships (associations, interactions, causal links)
+- Biolink Model schema (`biolink:Disease`, `biolink:Gene`, `biolink:PhenotypicFeature`, etc.)
+
+**Configuration:**
+1. **Install Neo4j Desktop** (recommended) or use Docker
+2. **Import Monarch Initiative dump** into a database named `monarch`
+3. **Create `.env` file** in project root:
+   ```bash
+   NEO4J_URI=neo4j://127.0.0.1:7687
+   NEO4J_USER=neo4j
+   NEO4J_PASSWORD=your-password
+   NEO4J_DATABASE=monarch
+   ```
+
+**Fallback Behavior:**
+- **With Neo4j:** Connects to Monarch database and uses real-world biomedical data
 - **Without Neo4j:** Automatically falls back to in-memory knowledge store seeded from [backend/knowledge_graph/seed_data.py](backend/knowledge_graph/seed_data.py)
 
+**Testing Connection:**
 ```bash
-# Option: Run Neo4j via Docker
-docker run -p 7474:7474 -p 7687:7687 neo4j:latest
+# Test Monarch database connection
+python test_monarch_database.py
+
+# Test general Neo4j connection
+python test_neo4j_connection.py
 ```
+
+**Important Schema Note:**
+The Monarch Initiative uses the **Biolink Model** schema (e.g., `biolink:Disease`, `biolink:has_phenotype`), while the project's custom schema uses simpler labels (e.g., `Disease`, `HAS_PHENOTYPE`). The `KnowledgeGraphService` currently expects the custom schema. To use Monarch data, you'll need to either:
+1. Create an adapter layer to translate between schemas
+2. Write new queries matching Monarch's schema
+3. Use both databases (custom for project-specific data, Monarch for broader biomedical knowledge)
 
 ### Running Notebooks
 ```bash
@@ -86,13 +136,44 @@ Main orchestration logic that:
 
 #### 3. Knowledge Graph Service ([backend/knowledge_graph/service.py](backend/knowledge_graph/service.py))
 Dual-mode service that abstracts storage:
-- **Neo4j mode:** Full graph database with constraints, indexes, and Cypher queries
+- **Neo4j mode:** Connects to Neo4j database (Monarch Initiative or custom schema)
 - **In-memory mode:** Python dictionaries seeded from `seed_data.py` (automatic fallback)
 
-Key queries:
-- `get_disease_profiles()`: Returns disease metadata, phenotypes, and diagnostic tests
+**Connection Logic:**
+- Reads environment variables (`NEO4J_URI`, `NEO4J_USER`, `NEO4J_PASSWORD`, `NEO4J_DATABASE`)
+- Attempts Neo4j connection on initialization
+- Falls back to in-memory store if connection fails or variables not set
+- Logs connection status for debugging
+
+**Current Schema Support:**
+The service queries expect the **custom schema** defined in `schema.py`:
+- Node labels: `Disease`, `Gene`, `Phenotype`, `Variant`, `Treatment`, etc.
+- Relationships: `HAS_PHENOTYPE`, `CAUSED_BY_MUTATION_IN`, `ELIGIBLE_FOR`, etc.
+
+**Monarch Initiative Schema:**
+The Monarch database uses **Biolink Model** schema:
+- Node labels: `biolink:Disease`, `biolink:Gene`, `biolink:PhenotypicFeature`, etc.
+- Relationships: `biolink:has_phenotype`, `biolink:causes`, `biolink:gene_associated_with_condition`, etc.
+
+**Key Methods:**
+- `get_disease_profiles()`: Returns disease metadata, phenotypes, and diagnostic tests (custom schema)
 - `get_variant_annotations()`: Returns variant-to-phenotype and variant-to-treatment mappings
 - `get_treatment_recommendations()`: Disease-specific management guidelines
+
+**Note:** To query Monarch data, you'll need to write Cypher queries using `biolink:` prefixed labels and relationship types, or create an adapter layer.
+
+**Example Monarch Query:**
+```cypher
+// Find diseases associated with a gene
+MATCH (g:`biolink:Gene` {id: "HGNC:2928"})-[:`biolink:causes`]->(d:`biolink:Disease`)
+RETURN d.id, d.name LIMIT 10
+
+// Find phenotypes for a disease
+MATCH (d:`biolink:Disease` {id: "MONDO:0007254"})-[:`biolink:has_phenotype`]->(p:`biolink:PhenotypicFeature`)
+RETURN p.id, p.name LIMIT 10
+```
+
+Note: Labels with colons must be escaped with backticks in Cypher: `` `biolink:Disease` ``
 
 #### 4. Knowledge Graph Schema ([backend/knowledge_graph/schema.py](backend/knowledge_graph/schema.py))
 Defines the graph model with nodes (Disease, Gene, Phenotype, Variant, Treatment, etc.) and relationships (HAS_PHENOTYPE, CAUSED_BY_MUTATION_IN, ELIGIBLE_FOR, etc.). Schema applies to both Neo4j and in-memory implementations.
@@ -164,7 +245,10 @@ Based on git history and code structure:
 - ✅ Knowledge graph schema and seed data
 - ✅ Scenario processor with variant interpretation
 - ✅ In-memory knowledge store with Neo4j support
+- ✅ Neo4j connection to Monarch Initiative database (1.3M+ nodes, 14.7M+ relationships)
+- ✅ Database connection testing scripts (`test_monarch_database.py`, `test_neo4j_connection.py`)
 - ✅ Demonstration notebook with 4 test cases
+- ⚠️ Schema adapter needed (Monarch uses `biolink:` schema, project uses custom schema)
 - ❌ FastAPI endpoints (planned, see README)
 - ❌ RAG pipeline for literature (planned)
 - ❌ Frontend interface (planned)
@@ -220,7 +304,7 @@ backend/
 │   ├── clinical_scenario.py      # Pydantic models (input/output schema)
 │   └── scenario_processor.py     # Main processing pipeline
 └── knowledge_graph/
-    ├── schema.py                  # Graph schema definition
+    ├── schema.py                  # Graph schema definition (custom schema)
     ├── service.py                 # Knowledge retrieval service (Neo4j + in-memory)
     ├── seed_data.py               # Curated clinical domain knowledge
     └── memory.py                  # In-memory store implementation (if separate)
@@ -237,6 +321,11 @@ docs/
 
 notebooks/
 └── demo_scenario_processing.ipynb # Test scenarios and demonstrations
+
+# Testing and utilities
+test_monarch_database.py           # Explore Monarch Initiative database schema
+test_neo4j_connection.py          # Test Neo4j connection and basic queries
+.env                                # Neo4j connection configuration (not in git)
 ```
 
 ## Documentation Extraction

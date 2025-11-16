@@ -1,0 +1,34 @@
+[project]
+name = "camk-clinical-decision-support"
+version = "0.1.0"
+description = "Knowledge graph-driven clinical decision support system for rare muscular dystrophies"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "neo4j>=5.0.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "jupyter>=1.0.0",
+    "ipython>=8.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.0.0",
+    "ipython>=8.0.0",
+]
+
+[tool.uv.sources]
+# If you have local dependencies, specify them here
+
