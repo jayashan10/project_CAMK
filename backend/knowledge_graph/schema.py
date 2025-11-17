@@ -125,8 +125,9 @@ def build_constraint_statements() -> List[str]:
     for label, spec in SCHEMA_DESCRIPTION["nodes"].items():
         key = spec.get("key")
         if key:
+            constraint_name = f"{label.lower()}_{key}_unique"
             statements.append(
-                f"CREATE CONSTRAINT IF NOT EXISTS FOR (n:{label}) REQUIRE n.{key} IS UNIQUE"
+                f"CREATE CONSTRAINT {constraint_name} IF NOT EXISTS FOR (n:{label}) REQUIRE n.{key} IS UNIQUE"
             )
     return statements
 
@@ -134,9 +135,9 @@ def build_constraint_statements() -> List[str]:
 def build_index_statements() -> List[str]:
     """Indexes on frequently queried properties."""
     return [
-        "CREATE RANGE INDEX IF NOT EXISTS disease_name_index FOR (d:Disease) ON (d.name)",
-        "CREATE RANGE INDEX IF NOT EXISTS phenotype_feature_index FOR (p:Phenotype) ON (p.feature_key)",
-        "CREATE TEXT INDEX IF NOT EXISTS recommendation_text_index FOR (r:Recommendation) ON EACH [r.recommendation]",
+        "CREATE INDEX disease_name_index IF NOT EXISTS FOR (d:Disease) ON (d.name)",
+        "CREATE INDEX phenotype_feature_index IF NOT EXISTS FOR (p:Phenotype) ON (p.feature_key)",
+        "CREATE INDEX recommendation_text_index IF NOT EXISTS FOR (r:Recommendation) ON (r.recommendation)",
     ]
 
 

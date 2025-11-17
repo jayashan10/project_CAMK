@@ -1,15 +1,17 @@
 """In-memory knowledge representation for muscular dystrophy decision support.
 
 This module offers a consistent data access layer that the scenario processor
-can consume without requiring a running Neo4j database. It mirrors the schema
-captured in :mod:`backend.knowledge_graph.schema` and is intended for unit tests
-and notebook demos.
+can consume without requiring a running Neo4j database.
+
+Note: Disease data now comes from Monarch Initiative database. This module only
+stores clinical decision support data (treatments, pathways, variants) from
+clinical_data.py.
 """
 from __future__ import annotations
 
 from typing import Dict, List
 
-from . import seed_data
+from . import clinical_data
 
 
 class InMemoryKnowledgeGraph:
@@ -21,32 +23,27 @@ class InMemoryKnowledgeGraph:
         self.general_recommendations: List[Dict] = []
 
     def seed(self) -> None:
-        self.diseases = {
-            disease["code"]: {
-                "code": disease["code"],
-                "name": disease["name"],
-                "inheritance": disease["inheritance"],
-                "typical_onset": [disease["typical_onset"]["min"], disease["typical_onset"]["max"]],
-                "key_features": disease["key_features"],
-                "diagnostic_tests": [test["name"] for test in disease["diagnostic_tests"]],
-                "phenotypes": disease["phenotypes"],
-                "pathways": disease.get("pathways", []),
-            }
-            for disease in seed_data.DISEASES
-        }
+        """
+        Seed in-memory store with clinical data.
+
+        Note: Disease profiles now come from Monarch database, not hardcoded data.
+        This only seeds treatment recommendations, pathways, and variant annotations.
+        """
+        # Disease data now comes from Monarch - kept empty for legacy compatibility
+        self.diseases = {}
 
         self.recommendations = {}
-        for rec in seed_data.TREATMENT_RECOMMENDATIONS:
+        for rec in clinical_data.TREATMENT_RECOMMENDATIONS:
             self.recommendations.setdefault(rec["disease_code"], []).append(rec)
 
         self.diagnostic_pathways = {
-            pathway["code"]: pathway["steps"] for pathway in seed_data.DIAGNOSTIC_PATHWAYS
+            pathway["code"]: pathway["steps"] for pathway in clinical_data.DIAGNOSTIC_PATHWAYS
         }
 
-        self.general_recommendations = seed_data.GENERAL_RECOMMENDATIONS
+        self.general_recommendations = clinical_data.GENERAL_RECOMMENDATIONS
 
         self.variant_annotations = {}
-        for annotation in seed_data.VARIANT_ANNOTATIONS:
+        for annotation in clinical_data.VARIANT_ANNOTATIONS:
             key = (annotation["gene"], annotation["variant_type"])
             self.variant_annotations.setdefault(key, []).append(annotation)
 

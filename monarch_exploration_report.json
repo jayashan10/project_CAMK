@@ -1,0 +1,1419 @@
+{
+  "database": "monarch",
+  "uri": "neo4j://127.0.0.1:7687",
+  "exploration_date": "2025-11-15",
+  "schema": {
+    "node_labels": [
+      "DataSource",
+      "DiagnosticPathway",
+      "DiagnosticTest",
+      "Disease",
+      "Gene",
+      "GeneralRecommendation",
+      "Phenotype",
+      "Recommendation",
+      "Treatment",
+      "Variant",
+      "biolink:AnatomicalEntity",
+      "biolink:BiologicalEntity",
+      "biolink:BiologicalProcess",
+      "biolink:BiologicalProcessOrActivity",
+      "biolink:Cell",
+      "biolink:CellularComponent",
+      "biolink:ChemicalEntity",
+      "biolink:ChemicalEntityOrGeneOrGeneProduct",
+      "biolink:ChemicalEntityOrProteinOrPolypeptide",
+      "biolink:ChemicalOrDrugOrTreatment",
+      "biolink:Disease",
+      "biolink:DiseaseOrPhenotypicFeature",
+      "biolink:Entity",
+      "biolink:Gene",
+      "biolink:GeneOrGeneProduct",
+      "biolink:GeneProductMixin",
+      "biolink:GenomicEntity",
+      "biolink:Genotype",
+      "biolink:LifeStage",
+      "biolink:MacromolecularMachineMixin",
+      "biolink:MolecularActivity",
+      "biolink:MolecularEntity",
+      "biolink:NamedThing",
+      "biolink:Occurrent",
+      "biolink:OntologyClass",
+      "biolink:OrganismTaxon",
+      "biolink:OrganismalEntity",
+      "biolink:Pathway",
+      "biolink:PhenotypicFeature",
+      "biolink:PhysicalEssence",
+      "biolink:PhysicalEssenceOrOccurrent",
+      "biolink:Polypeptide",
+      "biolink:Protein",
+      "biolink:SequenceVariant",
+      "biolink:SubjectOfInvestigation",
+      "biolink:ThingWithTaxon"
+    ],
+    "relationship_types": [
+      "biolink:actively_involved_in",
+      "biolink:acts_upstream_of",
+      "biolink:acts_upstream_of_negative_effect",
+      "biolink:acts_upstream_of_or_within",
+      "biolink:acts_upstream_of_or_within_negative_effect",
+      "biolink:acts_upstream_of_or_within_positive_effect",
+      "biolink:acts_upstream_of_positive_effect",
+      "biolink:ameliorates_condition",
+      "biolink:associated_with_increased_likelihood_of",
+      "biolink:caused_by",
+      "biolink:causes",
+      "biolink:colocalizes_with",
+      "biolink:contraindicated_in",
+      "biolink:contributes_to",
+      "biolink:disease_has_location",
+      "biolink:disrupts",
+      "biolink:enables",
+      "biolink:expressed_in",
+      "biolink:gene_associated_with_condition",
+      "biolink:genetically_associated_with",
+      "biolink:has_mode_of_inheritance",
+      "biolink:has_participant",
+      "biolink:has_phenotype",
+      "biolink:has_sequence_variant",
+      "biolink:interacts_with",
+      "biolink:is_active_in",
+      "biolink:is_sequence_variant_of",
+      "biolink:located_in",
+      "biolink:model_of",
+      "biolink:orthologous_to",
+      "biolink:part_of",
+      "biolink:participates_in",
+      "biolink:preventative_for_condition",
+      "biolink:related_to",
+      "biolink:subclass_of",
+      "biolink:treats_or_applied_or_studied_to_treat"
+    ],
+    "node_counts": {
+      "DataSource": 0,
+      "DiagnosticPathway": 0,
+      "DiagnosticTest": 0,
+      "Disease": 0,
+      "Gene": 0,
+      "GeneralRecommendation": 0,
+      "Phenotype": 0,
+      "Recommendation": 0,
+      "Treatment": 0,
+      "Variant": 0,
+      "biolink:AnatomicalEntity": 74091,
+      "biolink:BiologicalEntity": 1307970,
+      "biolink:BiologicalProcess": 53058,
+      "biolink:BiologicalProcessOrActivity": 65851,
+      "biolink:Cell": 3402,
+      "biolink:CellularComponent": 4568,
+      "biolink:ChemicalEntity": 22769,
+      "biolink:ChemicalEntityOrGeneOrGeneProduct": 640596,
+      "biolink:ChemicalEntityOrProteinOrPolypeptide": 49153,
+      "biolink:ChemicalOrDrugOrTreatment": 22769
+    },
+    "relationship_counts": {
+      "biolink:actively_involved_in": 1087293,
+      "biolink:acts_upstream_of": 12079,
+      "biolink:acts_upstream_of_negative_effect": 291,
+      "biolink:acts_upstream_of_or_within": 282031,
+      "biolink:acts_upstream_of_or_within_negative_effect": 253,
+      "biolink:acts_upstream_of_or_within_positive_effect": 796,
+      "biolink:acts_upstream_of_positive_effect": 899,
+      "biolink:ameliorates_condition": 786,
+      "biolink:associated_with_increased_likelihood_of": 4534,
+      "biolink:caused_by": 5,
+      "biolink:causes": 20521,
+      "biolink:colocalizes_with": 4634,
+      "biolink:contraindicated_in": 3,
+      "biolink:contributes_to": 9648,
+      "biolink:disease_has_location": 1018,
+      "biolink:disrupts": 87,
+      "biolink:enables": 1251497,
+      "biolink:expressed_in": 2422462,
+      "biolink:gene_associated_with_condition": 8101,
+      "biolink:genetically_associated_with": 3558
+    }
+  },
+  "node_details": {
+    "biolink:Disease": {
+      "label": "biolink:Disease",
+      "properties": {},
+      "sample_nodes": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/MONDO_0009047",
+          "synonym": [
+            "cryptorchidism",
+            "cryptorchidism (disease)",
+            "cryptorchidism, unilateral or bilateral",
+            "cryptorchism",
+            "undescended testes",
+            "undescended testicle",
+            "undescended testicles",
+            "undescended testis"
+          ],
+          "xref": [
+            "DOID:11383",
+            "EFO:0004562",
+            "HP:0000028",
+            "ICD9:752.5",
+            "ICD9:752.51",
+            "MEDGEN:8192",
+            "MESH:D003456",
+            "NCIT:C12326",
+            "OMIM:219050",
+            "SCTID:204878001",
+            "UMLS:C0010417",
+            "icd11.foundation:1134950387"
+          ],
+          "name": "cryptorchidism",
+          "namespace": "MONDO",
+          "description": "The failure of one or both testes of a male fetus to descend from the abdomen into the scrotum during the late part of pregnancy. If not surgically corrected in early childhood, males may be at increased risk for testicular cancer later in life.",
+          "provided_by": "phenio_nodes",
+          "id": "MONDO:0009047",
+          "exact_synonym": [
+            "cryptorchidism",
+            "cryptorchidism (disease)",
+            "cryptorchism",
+            "undescended testes",
+            "undescended testicle",
+            "undescended testicles",
+            "undescended testis"
+          ],
+          "category": [
+            "biolink:Disease",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ],
+          "related_synonym": [
+            "cryptorchidism, unilateral or bilateral"
+          ],
+          "subsets": [
+            "otar"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/MONDO_0009060",
+          "synonym": [
+            "cystic disease of lung"
+          ],
+          "xref": [
+            "MEDGEN:640840",
+            "MESH:C563237",
+            "OMIM:219600",
+            "UMLS:C0555214"
+          ],
+          "name": "cystic disease of lung",
+          "namespace": "MONDO",
+          "provided_by": "phenio_nodes",
+          "id": "MONDO:0009060",
+          "exact_synonym": [
+            "cystic disease of lung"
+          ],
+          "category": [
+            "biolink:Disease",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/MONDO_0009079",
+          "synonym": [
+            "DOORS",
+            "DOORS syndrome",
+            "Digitorenocerebral syndrome",
+            "Eronen syndrome",
+            "autosomal recessive deafness-onychodystrophy syndrome",
+            "brachydactyly due to absence of distal phalanges",
+            "deafness onychodystrophy osteodystrophy and intellectual disability syndrome",
+            "deafness onychodystrophy osteodystrophy and mental retardation syndrome",
+            "deafness, onychodystrophy, osteodystrophy, intellectual disability, and seizures syndrome",
+            "deafness, onychodystrophy, osteodystrophy, mental retardation, and seizures syndrome",
+            "deafness-onychodystrophy-osteodystrophy-intellectual disability syndrome",
+            "deafness-onychodystrophy-osteodystrophy-intellectual disability-seizures syndrome",
+            "deafness-onychoosteodystrophy-intellectual disability syndrome",
+            "door syndrome",
+            "drc syndrome"
+          ],
+          "xref": [
+            "DOID:0111627",
+            "GARD:1685",
+            "MEDGEN:208648",
+            "MESH:C563052",
+            "NORD:1058",
+            "OMIM:220500",
+            "Orphanet:79500",
+            "SCTID:719800009",
+            "UMLS:C0795934"
+          ],
+          "name": "DOORS syndrome",
+          "namespace": "MONDO",
+          "description": "DOORS syndrome (also known as DOOR syndrome) is a multiple congenital anomalies-intellectual disability syndrome characterized by sensorineural hearing loss (deafness), onychodystrophy, osteodystrophy, mild to profound intellectual disability, and seizures. Isolated seizure disorders and isolated hearing loss have also been reported in individuals as a proposed spectrum of DOORS syndrome.",
+          "provided_by": "phenio_nodes",
+          "id": "MONDO:0009079",
+          "exact_synonym": [
+            "DOORS syndrome",
+            "autosomal recessive deafness-onychodystrophy syndrome",
+            "deafness-onychodystrophy-osteodystrophy-intellectual disability syndrome",
+            "deafness-onychodystrophy-osteodystrophy-intellectual disability-seizures syndrome",
+            "deafness-onychoosteodystrophy-intellectual disability syndrome",
+            "door syndrome"
+          ],
+          "category": [
+            "biolink:Disease",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ],
+          "related_synonym": [
+            "DOORS",
+            "Digitorenocerebral syndrome",
+            "Eronen syndrome",
+            "brachydactyly due to absence of distal phalanges",
+            "deafness onychodystrophy osteodystrophy and intellectual disability syndrome",
+            "deafness onychodystrophy osteodystrophy and mental retardation syndrome",
+            "deafness, onychodystrophy, osteodystrophy, intellectual disability, and seizures syndrome",
+            "deafness, onychodystrophy, osteodystrophy, mental retardation, and seizures syndrome",
+            "drc syndrome"
+          ],
+          "subsets": [
+            "clingen",
+            "gard_rare",
+            "nord_rare",
+            "ordo_disorder",
+            "ordo_malformation_syndrome",
+            "orphanet_rare",
+            "otar",
+            "rare"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/MONDO_0009088",
+          "synonym": [
+            "deafness, neural, with atypical atopic dermatitis"
+          ],
+          "xref": [
+            "MEDGEN:346567",
+            "MESH:C565639",
+            "OMIM:221700",
+            "UMLS:C1857334"
+          ],
+          "name": "deafness, neural, with atypical atopic dermatitis",
+          "namespace": "MONDO",
+          "provided_by": "phenio_nodes",
+          "id": "MONDO:0009088",
+          "exact_synonym": [
+            "deafness, neural, with atypical atopic dermatitis"
+          ],
+          "category": [
+            "biolink:Disease",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/MONDO_0009100",
+          "synonym": [
+            "IDDM",
+            "IDDM1",
+            "diabetes mellitus, insulin-dependent",
+            "diabetes mellitus, insulin-dependent, 1",
+            "diabetes mellitus, insulin-dependent-1",
+            "diabetes mellitus, type 1",
+            "diabetes, type 1, susceptibility to",
+            "insulin-dependent diabetes mellitus 1",
+            "juvenile-onset diabetes",
+            "type 1 diabetes mellitus"
+          ],
+          "xref": [
+            "MEDGEN:1734436",
+            "UMLS:C5435660"
+          ],
+          "name": "type 1 diabetes mellitus 1",
+          "namespace": "MONDO",
+          "description": "An inherited susceptibility or predisposition to developing 1 diabetes mellitus that is caused by variation in genes located in the MHC complex on chromosome 6p21.3.",
+          "provided_by": "phenio_nodes",
+          "id": "MONDO:0009100",
+          "exact_synonym": [
+            "IDDM1",
+            "diabetes mellitus, insulin-dependent, 1",
+            "diabetes mellitus, insulin-dependent-1",
+            "insulin-dependent diabetes mellitus 1"
+          ],
+          "broad_synonym": [
+            "IDDM",
+            "diabetes mellitus, insulin-dependent",
+            "diabetes mellitus, type 1",
+            "juvenile-onset diabetes",
+            "type 1 diabetes mellitus"
+          ],
+          "category": [
+            "biolink:Disease",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ],
+          "related_synonym": [
+            "diabetes, type 1, susceptibility to"
+          ]
+        }
+      ],
+      "property_keys": [
+        "broad_synonym",
+        "category",
+        "deprecated",
+        "description",
+        "exact_synonym",
+        "id",
+        "iri",
+        "name",
+        "namespace",
+        "narrow_synonym",
+        "provided_by",
+        "related_synonym",
+        "subsets",
+        "synonym",
+        "xref"
+      ]
+    },
+    "biolink:Gene": {
+      "label": "biolink:Gene",
+      "properties": {},
+      "sample_nodes": [
+        {
+          "in_taxon_label": "Mus musculus",
+          "symbol": "Gm56516",
+          "xref": [
+            "ENSEMBL:ENSMUSG00000120407",
+            "MGI:7336946"
+          ],
+          "full_name": "predicted gene, 56516",
+          "in_taxon": "NCBITaxon:10090",
+          "name": "Gm56516",
+          "namespace": "MGI",
+          "provided_by": "alliance_gene_nodes",
+          "id": "MGI:7336946",
+          "category": [
+            "biolink:Gene",
+            "biolink:GeneOrGeneProduct",
+            "biolink:GenomicEntity",
+            "biolink:ChemicalEntityOrGeneOrGeneProduct",
+            "biolink:PhysicalEssence",
+            "biolink:OntologyClass",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity",
+            "biolink:PhysicalEssenceOrOccurrent",
+            "biolink:MacromolecularMachineMixin"
+          ],
+          "type": "SO:0002127"
+        },
+        {
+          "in_taxon_label": "Mus musculus",
+          "symbol": "Gm56541",
+          "xref": [
+            "ENSEMBL:ENSMUSG00000120835",
+            "MGI:7336996"
+          ],
+          "full_name": "predicted gene, 56541",
+          "in_taxon": "NCBITaxon:10090",
+          "name": "Gm56541",
+          "namespace": "MGI",
+          "provided_by": "alliance_gene_nodes",
+          "id": "MGI:7336996",
+          "category": [
+            "biolink:Gene",
+            "biolink:GeneOrGeneProduct",
+            "biolink:GenomicEntity",
+            "biolink:ChemicalEntityOrGeneOrGeneProduct",
+            "biolink:PhysicalEssence",
+            "biolink:OntologyClass",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity",
+            "biolink:PhysicalEssenceOrOccurrent",
+            "biolink:MacromolecularMachineMixin"
+          ],
+          "type": "SO:0002127"
+        },
+        {
+          "in_taxon_label": "Mus musculus",
+          "symbol": "Gm56547",
+          "xref": [
+            "ENSEMBL:ENSMUSG00000120988",
+            "MGI:7337008"
+          ],
+          "full_name": "predicted gene, 56547",
+          "in_taxon": "NCBITaxon:10090",
+          "name": "Gm56547",
+          "namespace": "MGI",
+          "provided_by": "alliance_gene_nodes",
+          "id": "MGI:7337008",
+          "category": [
+            "biolink:Gene",
+            "biolink:GeneOrGeneProduct",
+            "biolink:GenomicEntity",
+            "biolink:ChemicalEntityOrGeneOrGeneProduct",
+            "biolink:PhysicalEssence",
+            "biolink:OntologyClass",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity",
+            "biolink:PhysicalEssenceOrOccurrent",
+            "biolink:MacromolecularMachineMixin"
+          ],
+          "type": "SO:0002127"
+        },
+        {
+          "in_taxon_label": "Mus musculus",
+          "symbol": "Gm56601",
+          "xref": [
+            "ENSEMBL:ENSMUSG00000120439",
+            "MGI:7337116"
+          ],
+          "full_name": "predicted gene, 56601",
+          "in_taxon": "NCBITaxon:10090",
+          "name": "Gm56601",
+          "namespace": "MGI",
+          "provided_by": "alliance_gene_nodes",
+          "id": "MGI:7337116",
+          "category": [
+            "biolink:Gene",
+            "biolink:GeneOrGeneProduct",
+            "biolink:GenomicEntity",
+            "biolink:ChemicalEntityOrGeneOrGeneProduct",
+            "biolink:PhysicalEssence",
+            "biolink:OntologyClass",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity",
+            "biolink:PhysicalEssenceOrOccurrent",
+            "biolink:MacromolecularMachineMixin"
+          ],
+          "type": "SO:0002127"
+        },
+        {
+          "in_taxon_label": "Mus musculus",
+          "symbol": "Gm56660",
+          "xref": [
+            "ENSEMBL:ENSMUSG00000120814",
+            "MGI:7337234"
+          ],
+          "full_name": "predicted gene, 56660",
+          "in_taxon": "NCBITaxon:10090",
+          "name": "Gm56660",
+          "namespace": "MGI",
+          "provided_by": "alliance_gene_nodes",
+          "id": "MGI:7337234",
+          "category": [
+            "biolink:Gene",
+            "biolink:GeneOrGeneProduct",
+            "biolink:GenomicEntity",
+            "biolink:ChemicalEntityOrGeneOrGeneProduct",
+            "biolink:PhysicalEssence",
+            "biolink:OntologyClass",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity",
+            "biolink:PhysicalEssenceOrOccurrent",
+            "biolink:MacromolecularMachineMixin"
+          ],
+          "type": "SO:0002127"
+        }
+      ],
+      "property_keys": [
+        "category",
+        "full_name",
+        "id",
+        "in_taxon",
+        "in_taxon_label",
+        "name",
+        "namespace",
+        "provided_by",
+        "symbol",
+        "synonym",
+        "type",
+        "xref"
+      ]
+    },
+    "biolink:PhenotypicFeature": {
+      "label": "biolink:PhenotypicFeature",
+      "properties": {},
+      "sample_nodes": [
+        {
+          "iri": "http://purl.obolibrary.org/obo/ZP_0000034",
+          "name": "hindbrain quality, abnormal",
+          "namespace": "ZP",
+          "description": "Abnormal(ly) quality (of) hindbrain.",
+          "provided_by": "phenio_nodes",
+          "id": "ZP:0000034",
+          "category": [
+            "biolink:PhenotypicFeature",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/ZP_0000041",
+          "name": "pharyngeal arch 3-7 skeleton quality, abnormal",
+          "namespace": "ZP",
+          "description": "Abnormal(ly) quality (of) pharyngeal arch 3-7 skeleton.",
+          "provided_by": "phenio_nodes",
+          "id": "ZP:0000041",
+          "category": [
+            "biolink:PhenotypicFeature",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/ZP_0000058",
+          "name": "Meckel's cartilage fused with ceratohyal cartilage, abnormal",
+          "namespace": "ZP",
+          "description": "Abnormal(ly) fused with (of) Meckel's cartilage (ceratohyal cartilage).",
+          "provided_by": "phenio_nodes",
+          "id": "ZP:0000058",
+          "category": [
+            "biolink:PhenotypicFeature",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/ZP_0000059",
+          "name": "exocrine pancreas mislocalised anteriorly, abnormal",
+          "namespace": "ZP",
+          "description": "Abnormal(ly) mislocalised anteriorly (of) exocrine pancreas.",
+          "provided_by": "phenio_nodes",
+          "id": "ZP:0000059",
+          "category": [
+            "biolink:PhenotypicFeature",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ]
+        },
+        {
+          "iri": "http://purl.obolibrary.org/obo/ZP_0000076",
+          "name": "posterior lateral line nerve decreased length, abnormal",
+          "namespace": "ZP",
+          "description": "Abnormal(ly) decreased length (of) posterior lateral line nerve.",
+          "provided_by": "phenio_nodes",
+          "id": "ZP:0000076",
+          "category": [
+            "biolink:PhenotypicFeature",
+            "biolink:DiseaseOrPhenotypicFeature",
+            "biolink:BiologicalEntity",
+            "biolink:ThingWithTaxon",
+            "biolink:NamedThing",
+            "biolink:Entity"
+          ]
+        }
+      ],
+      "property_keys": [
+        "category",
+        "deprecated",
+        "description",
+        "id",
+        "iri",
+        "name",
+        "namespace",
+        "provided_by"
+      ]
+    }
+  },
+  "disease_phenotype_associations": {
+    "patterns": [
+      {
+        "relType": "biolink:has_phenotype",
+        "dLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ],
+        "pLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:DiseaseOrPhenotypicFeature",
+          "biolink:PhenotypicFeature"
+        ],
+        "cnt": 255967
+      },
+      {
+        "relType": "biolink:has_mode_of_inheritance",
+        "dLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ],
+        "pLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:DiseaseOrPhenotypicFeature",
+          "biolink:PhenotypicFeature"
+        ],
+        "cnt": 8821
+      },
+      {
+        "relType": "biolink:related_to",
+        "dLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ],
+        "pLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:DiseaseOrPhenotypicFeature",
+          "biolink:PhenotypicFeature"
+        ],
+        "cnt": 6
+      }
+    ],
+    "samples": [
+      {
+        "disease_id": "MONDO:0009047",
+        "disease_name": "cryptorchidism",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0000028",
+        "phenotype_name": "Cryptorchidism"
+      },
+      {
+        "disease_id": "MONDO:0009047",
+        "disease_name": "cryptorchidism",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0000104",
+        "phenotype_name": "Renal agenesis"
+      },
+      {
+        "disease_id": "MONDO:0009047",
+        "disease_name": "cryptorchidism",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0012741",
+        "phenotype_name": "Unilateral cryptorchidism"
+      },
+      {
+        "disease_id": "MONDO:0009047",
+        "disease_name": "cryptorchidism",
+        "relationship": "biolink:has_mode_of_inheritance",
+        "phenotype_id": "HP:0000006",
+        "phenotype_name": "Autosomal dominant inheritance"
+      },
+      {
+        "disease_id": "MONDO:0009060",
+        "disease_name": "cystic disease of lung",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0005948",
+        "phenotype_name": "Multiple pulmonary cysts"
+      },
+      {
+        "disease_id": "MONDO:0009060",
+        "disease_name": "cystic disease of lung",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0002719",
+        "phenotype_name": "Recurrent infections"
+      },
+      {
+        "disease_id": "MONDO:0009060",
+        "disease_name": "cystic disease of lung",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0004876",
+        "phenotype_name": "Spontaneous neonatal pneumothorax"
+      },
+      {
+        "disease_id": "MONDO:0009060",
+        "disease_name": "cystic disease of lung",
+        "relationship": "biolink:has_mode_of_inheritance",
+        "phenotype_id": "HP:0000007",
+        "phenotype_name": "Autosomal recessive inheritance"
+      },
+      {
+        "disease_id": "MONDO:0009079",
+        "disease_name": "DOORS syndrome",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0000121",
+        "phenotype_name": "Nephrocalcinosis"
+      },
+      {
+        "disease_id": "MONDO:0009079",
+        "disease_name": "DOORS syndrome",
+        "relationship": "biolink:has_phenotype",
+        "phenotype_id": "HP:0012810",
+        "phenotype_name": "Wide nasal base"
+      }
+    ]
+  },
+  "gene_disease_associations": {
+    "patterns": [
+      {
+        "relType": "biolink:causes",
+        "gLabels": [
+          "biolink:GenomicEntity",
+          "biolink:PhysicalEssence",
+          "biolink:OntologyClass",
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:PhysicalEssenceOrOccurrent",
+          "biolink:Gene",
+          "biolink:GeneOrGeneProduct",
+          "biolink:ChemicalEntityOrGeneOrGeneProduct",
+          "biolink:MacromolecularMachineMixin"
+        ],
+        "dLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ],
+        "cnt": 8919
+      },
+      {
+        "relType": "biolink:gene_associated_with_condition",
+        "gLabels": [
+          "biolink:GenomicEntity",
+          "biolink:PhysicalEssence",
+          "biolink:OntologyClass",
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:PhysicalEssenceOrOccurrent",
+          "biolink:Gene",
+          "biolink:GeneOrGeneProduct",
+          "biolink:ChemicalEntityOrGeneOrGeneProduct",
+          "biolink:MacromolecularMachineMixin"
+        ],
+        "dLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ],
+        "cnt": 8101
+      },
+      {
+        "relType": "biolink:contributes_to",
+        "gLabels": [
+          "biolink:GenomicEntity",
+          "biolink:PhysicalEssence",
+          "biolink:OntologyClass",
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:PhysicalEssenceOrOccurrent",
+          "biolink:Gene",
+          "biolink:GeneOrGeneProduct",
+          "biolink:ChemicalEntityOrGeneOrGeneProduct",
+          "biolink:MacromolecularMachineMixin"
+        ],
+        "dLabels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ],
+        "cnt": 581
+      }
+    ],
+    "samples": [
+      {
+        "gene_id": "HGNC:6086",
+        "gene_name": "INSL3",
+        "relationship": "biolink:causes",
+        "disease_id": "MONDO:0009047",
+        "disease_name": "cryptorchidism"
+      },
+      {
+        "gene_id": "HGNC:1603",
+        "gene_name": "CCR2",
+        "relationship": "biolink:causes",
+        "disease_id": "MONDO:0009060",
+        "disease_name": "cystic disease of lung"
+      },
+      {
+        "gene_id": "HGNC:29203",
+        "gene_name": "TBC1D24",
+        "relationship": "biolink:causes",
+        "disease_id": "MONDO:0009079",
+        "disease_name": "DOORS syndrome"
+      },
+      {
+        "gene_id": "HGNC:29203",
+        "gene_name": "TBC1D24",
+        "relationship": "biolink:gene_associated_with_condition",
+        "disease_id": "MONDO:0009079",
+        "disease_name": "DOORS syndrome"
+      },
+      {
+        "gene_id": "HGNC:854",
+        "gene_name": "ATP6V1B2",
+        "relationship": "biolink:gene_associated_with_condition",
+        "disease_id": "MONDO:0009079",
+        "disease_name": "DOORS syndrome"
+      },
+      {
+        "gene_id": "HGNC:10856",
+        "gene_name": "SI",
+        "relationship": "biolink:gene_associated_with_condition",
+        "disease_id": "MONDO:0009114",
+        "disease_name": "congenital sucrase-isomaltase deficiency"
+      },
+      {
+        "gene_id": "HGNC:10856",
+        "gene_name": "SI",
+        "relationship": "biolink:causes",
+        "disease_id": "MONDO:0009114",
+        "disease_name": "congenital sucrase-isomaltase deficiency"
+      },
+      {
+        "gene_id": "HGNC:6530",
+        "gene_name": "LCT",
+        "relationship": "biolink:gene_associated_with_condition",
+        "disease_id": "MONDO:0009115",
+        "disease_name": "congenital lactase deficiency"
+      },
+      {
+        "gene_id": "HGNC:6530",
+        "gene_name": "LCT",
+        "relationship": "biolink:causes",
+        "disease_id": "MONDO:0009115",
+        "disease_name": "congenital lactase deficiency"
+      },
+      {
+        "gene_id": "HGNC:2689",
+        "gene_name": "DBH",
+        "relationship": "biolink:causes",
+        "disease_id": "MONDO:0009123",
+        "disease_name": "orthostatic hypotension 1"
+      }
+    ]
+  },
+  "muscular_dystrophies": {
+    "diseases": [
+      {
+        "id": "MONDO:0009181",
+        "name": "epidermolysis bullosa simplex 5B, with muscular dystrophy",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0000172",
+        "name": "muscular dystrophy-dystroglycanopathy, type B",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0008116",
+        "name": "oculopharyngeal muscular dystrophy",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0012279",
+        "name": "obsolete congenital muscular dystrophy merosin-positive",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0014120",
+        "name": "muscular dystrophy-dystroglycanopathy (congenital with brain and eye anomalies), type A13",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0014788",
+        "name": "autosomal recessive limb-girdle muscular dystrophy type 2W",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0021569",
+        "name": "Emery-Dreifuss muscular dystrophy 2, autosomal dominant",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0030355",
+        "name": "facioscapulohumeral muscular dystrophy 4, digenic",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0100496",
+        "name": "Emery-Dreifuss-like muscular dystrophy",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0010676",
+        "name": "muscular dystrophy, Hemizygous lethal type",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0013177",
+        "name": "congenital muscular dystrophy due to integrin alpha-7 deficiency",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0015152",
+        "name": "autosomal recessive limb-girdle muscular dystrophy",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:1010912",
+        "name": "muscular dystrophy, domestic cat",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:1011479",
+        "name": "Becker type muscular dystrophy, dog",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0009681",
+        "name": "Ullrich congenital muscular dystrophy 1A",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0010311",
+        "name": "Becker muscular dystrophy",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0010677",
+        "name": "muscular dystrophy, Mabry type",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0011009",
+        "name": "muscular dystrophy, congenital, with severe central nervous system atrophy and absence of large myelinated fibers",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0008773",
+        "name": "amino aciduria with mental deficiency, dwarfism, muscular dystrophy, osteoporosis, and acidosis",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      },
+      {
+        "id": "MONDO:0009364",
+        "name": "muscular dystrophy-dystroglycanopathy (congenital with brain and eye anomalies), type A1",
+        "labels": [
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:Disease",
+          "biolink:DiseaseOrPhenotypicFeature"
+        ]
+      }
+    ],
+    "detailed_associations": {
+      "MONDO:0007254": {
+        "info": {
+          "name": "breast cancer",
+          "id": "MONDO:0007254",
+          "props": {
+            "iri": "http://purl.obolibrary.org/obo/MONDO_0007254",
+            "xref": [
+              "DOID:1612",
+              "ICD10CM:C50",
+              "ICD9:174.8",
+              "MEDGEN:651",
+              "NCIT:C9335",
+              "SCTID:254837009",
+              "UMLS:C0006142"
+            ],
+            "description": "A primary or metastatic malignant neoplasm involving the breast. The vast majority of cases are carcinomas arising from the breast parenchyma or the nipple. Malignant breast neoplasms occur more frequently in females than in males.",
+            "broad_synonym": [
+              "breast tumor",
+              "breast tumour",
+              "mammary tumor",
+              "mammary tumour"
+            ],
+            "synonym": [
+              "breast cancer",
+              "breast tumor",
+              "breast tumour",
+              "cancer of breast",
+              "malignant breast neoplasm",
+              "malignant breast tumor",
+              "malignant breast tumour",
+              "malignant neoplasm of breast",
+              "malignant neoplasm of the breast",
+              "malignant tumor of breast",
+              "malignant tumor of the breast",
+              "malignant tumour of breast",
+              "malignant tumour of the breast",
+              "mammary cancer",
+              "mammary neoplasm",
+              "mammary tumor",
+              "mammary tumour",
+              "primary breast cancer"
+            ],
+            "narrow_synonym": [
+              "primary breast cancer"
+            ],
+            "name": "breast cancer",
+            "namespace": "MONDO",
+            "provided_by": "phenio_nodes",
+            "id": "MONDO:0007254",
+            "exact_synonym": [
+              "breast cancer",
+              "cancer of breast",
+              "malignant breast neoplasm",
+              "malignant breast tumor",
+              "malignant breast tumour",
+              "malignant neoplasm of breast",
+              "malignant neoplasm of the breast",
+              "malignant tumor of breast",
+              "malignant tumor of the breast",
+              "malignant tumour of breast",
+              "malignant tumour of the breast",
+              "mammary cancer"
+            ],
+            "category": [
+              "biolink:Disease",
+              "biolink:DiseaseOrPhenotypicFeature",
+              "biolink:BiologicalEntity",
+              "biolink:ThingWithTaxon",
+              "biolink:NamedThing",
+              "biolink:Entity"
+            ],
+            "related_synonym": [
+              "mammary neoplasm"
+            ],
+            "subsets": [
+              "otar"
+            ]
+          }
+        },
+        "genes": [],
+        "phenotypes": []
+      },
+      "MONDO:0008114": {
+        "info": {
+          "name": "obsessive-compulsive disorder",
+          "id": "MONDO:0008114",
+          "props": {
+            "iri": "http://purl.obolibrary.org/obo/MONDO_0008114",
+            "synonym": [
+              "Anancastic neurosis",
+              "OCD",
+              "obsessive compulsive disorder",
+              "obsessive-compulsive disorder",
+              "obsessive-compulsive disorder, susceptibility to"
+            ],
+            "xref": [
+              "DOID:10933",
+              "EFO:0004242",
+              "ICD10CM:F42",
+              "ICD10WHO:F42",
+              "ICD9:300.3",
+              "MEDGEN:14445",
+              "MESH:D009771",
+              "NCIT:C88411",
+              "OMIM:164230",
+              "SCTID:191736004",
+              "UMLS:C0028768",
+              "icd11.foundation:1582741816"
+            ],
+            "name": "obsessive-compulsive disorder",
+            "namespace": "MONDO",
+            "description": "A disorder characterized by the presence of persistent and recurrent irrational thoughts (obsessions), resulting in marked anxiety and repetitive excessive behaviors (compulsions) as a way to try to decrease that anxiety.",
+            "provided_by": "phenio_nodes",
+            "id": "MONDO:0008114",
+            "exact_synonym": [
+              "Anancastic neurosis",
+              "obsessive compulsive disorder",
+              "obsessive-compulsive disorder",
+              "obsessive-compulsive disorder, susceptibility to"
+            ],
+            "category": [
+              "biolink:Disease",
+              "biolink:DiseaseOrPhenotypicFeature",
+              "biolink:BiologicalEntity",
+              "biolink:ThingWithTaxon",
+              "biolink:NamedThing",
+              "biolink:Entity"
+            ],
+            "related_synonym": [
+              "OCD"
+            ],
+            "subsets": [
+              "omim_susceptibility",
+              "otar"
+            ]
+          }
+        },
+        "genes": [
+          {
+            "gene_id": "HGNC:11050",
+            "gene_name": "SLC6A4",
+            "relationship": "biolink:contributes_to"
+          },
+          {
+            "gene_id": "HGNC:5293",
+            "gene_name": "HTR2A",
+            "relationship": "biolink:contributes_to"
+          }
+        ],
+        "phenotypes": [
+          {
+            "phenotype_id": "HP:0000739",
+            "phenotype_name": "Anxiety",
+            "relationship": "biolink:has_phenotype"
+          },
+          {
+            "phenotype_id": "HP:0000006",
+            "phenotype_name": "Autosomal dominant inheritance",
+            "relationship": "biolink:has_mode_of_inheritance"
+          },
+          {
+            "phenotype_id": "HP:0000722",
+            "phenotype_name": "Compulsive behaviors",
+            "relationship": "biolink:has_phenotype"
+          },
+          {
+            "phenotype_id": "HP:0030212",
+            "phenotype_name": "Collectionism",
+            "relationship": "biolink:has_phenotype"
+          },
+          {
+            "phenotype_id": "HP:0000716",
+            "phenotype_name": "Depression",
+            "relationship": "biolink:has_phenotype"
+          },
+          {
+            "phenotype_id": "HP:0012166",
+            "phenotype_name": "Skin-picking",
+            "relationship": "biolink:has_phenotype"
+          }
+        ]
+      }
+    }
+  },
+  "dmd_gene": {
+    "gene": {
+      "id": "NCBIGene:396236",
+      "name": "DMD",
+      "symbol": "DMD",
+      "props": {
+        "in_taxon_label": "Gallus gallus",
+        "symbol": "DMD",
+        "full_name": "dystrophin",
+        "in_taxon": "NCBITaxon:9031",
+        "name": "DMD",
+        "namespace": "NCBIGene",
+        "description": "dystrophin",
+        "provided_by": "ncbi_gene_9031_nodes",
+        "id": "NCBIGene:396236",
+        "category": [
+          "biolink:Gene",
+          "biolink:GeneOrGeneProduct",
+          "biolink:GenomicEntity",
+          "biolink:ChemicalEntityOrGeneOrGeneProduct",
+          "biolink:PhysicalEssence",
+          "biolink:OntologyClass",
+          "biolink:BiologicalEntity",
+          "biolink:ThingWithTaxon",
+          "biolink:NamedThing",
+          "biolink:Entity",
+          "biolink:PhysicalEssenceOrOccurrent",
+          "biolink:MacromolecularMachineMixin"
+        ]
+      },
+      "labels": [
+        "biolink:GenomicEntity",
+        "biolink:PhysicalEssence",
+        "biolink:OntologyClass",
+        "biolink:BiologicalEntity",
+        "biolink:ThingWithTaxon",
+        "biolink:NamedThing",
+        "biolink:Entity",
+        "biolink:PhysicalEssenceOrOccurrent",
+        "biolink:Gene",
+        "biolink:GeneOrGeneProduct",
+        "biolink:ChemicalEntityOrGeneOrGeneProduct",
+        "biolink:MacromolecularMachineMixin"
+      ]
+    },
+    "associated_diseases": [],
+    "associated_phenotypes": []
+  }
+}

@@ -92,6 +92,13 @@ A knowledge graph-driven RAG system for clinical decision support in rare muscul
 └── .env                  # Neo4j configuration (not in git)
 ```
 
+### Monarch Integration
+
+- `backend/knowledge_graph/monarch_service.py` – queries Monarch using Biolink schema
+- `backend/knowledge_graph/monarch_mapper.py` – maps Biolink labels/relationships to project schema
+- `test_monarch_integration.py` – smoke test script to verify Monarch connectivity (`uv run python test_monarch_integration.py`)
+- `backend/knowledge_graph/seed_data.py` – **fallback only** when Neo4j/Monarch is unavailable
+
 ## Getting Started
 
 ### Prerequisites
@@ -173,6 +180,9 @@ python test_monarch_database.py
 
 # Or test general connection
 python test_neo4j_connection.py
+
+# Optional: run Monarch integration smoke tests
+python test_monarch_integration.py
 ```
 
 **Note:** The system automatically falls back to an in-memory knowledge store if Neo4j is not available or not configured.

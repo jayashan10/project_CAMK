@@ -148,13 +148,83 @@ class DifferentialDiagnosis(BaseModel):
 
 class ClinicalRecommendation(BaseModel):
     """
-    Clinical recommendation output
+    Clinical recommendation output (enhanced with RAG support)
     """
     category: str  # diagnosis, treatment, surveillance, genetic_counseling
     recommendation: str
     evidence_level: Optional[str] = None  # Level A, B, C
     references: Optional[List[str]] = None
     urgency: Optional[str] = None  # immediate, urgent, routine
+
+    # RAG-specific fields (optional, only present for RAG-sourced recommendations)
+    source_type: Optional[str] = Field(
+        default="static",
+        description="Source of recommendation: 'static' (clinical_data.py) or 'RAG' (Gemini File Search)"
+    )
+    citation: Optional[str] = Field(
+        default=None,
+        description="File URI or citation for RAG-sourced recommendations"
+    )
+    confidence: Optional[float] = Field(
+        default=None,
+        ge=0,
+        le=1,
+        description="Confidence score for RAG-sourced recommendations (0.0-1.0)"
+    )
+    chunk_id: Optional[str] = Field(
+        default=None,
+        description="Grounding chunk identifier for RAG-sourced recommendations"
+    )
+    retrieved_text: Optional[str] = Field(
+        default=None,
+        description="Actual text passage retrieved from clinical guideline (for RAG-sourced recommendations)"
+    )
+
+
+class HPOMapping(BaseModel):
+    """
+    Human Phenotype Ontology term mapping
+    """
+    clinical_feature: str
+    hpo_id: str
+    hpo_term: str
+    specificity_score: Optional[float] = None  # How specific this feature is for certain diseases
+
+
+class MonarchMatch(BaseModel):
+    """Individual disease match from Monarch knowledge graph"""
+    disease_id: str
+    disease_name: str
+    match_count: int = Field(..., description="Number of HPO terms matched")
+    matched_hpo_ids: List[str]
+    code: Optional[str] = None  # Project disease code (DMD, BMD, etc.) if mapped
+
+
+class MonarchSearchSummary(BaseModel):
+    """Summary of Monarch knowledge graph search results"""
+    total_diseases_found: int
+    hpo_ids_searched: List[str]
+    diseases_by_match_count: Dict[str, int] = Field(
+        description="Breakdown like {'2': 8, '1': 84}"
+    )
+
+
+class ScoringComponent(BaseModel):
+    """Individual component of disease scoring"""
+    component_name: str
+    points_added: float
+    reasoning: str
+
+
+class ScoringBreakdown(BaseModel):
+    """Detailed scoring breakdown for a disease"""
+    disease_code: str
+    disease_name: str
+    base_score: float
+    scoring_components: List[ScoringComponent]
+    final_score: float
+    included_in_differential: bool
+    exclusion_reason: Optional[str] = None
 
 
 class ScenarioResponse(BaseModel):
@@ -185,15 +255,33 @@ class ScenarioResponse(BaseModel):
     overall_confidence: Optional[float] = None
     limitations: Optional[List[str]] = None
 
+    # ═══════════════════════════════════════════════════════════════
+    # NEW: Enhanced reasoning flow data for visualization
+    # ═══════════════════════════════════════════════════════════════
 
-class HPOMapping(BaseModel):
-    """
-    Human Phenotype Ontology term mapping
-    """
-    clinical_feature: str
-    hpo_id: str
-    hpo_term: str
-    specificity_score: Optional[float] = None  # How specific this feature is for certain diseases
+    # HPO mappings: symptom → standardized HPO terms
+    hpo_mappings: Optional[List[HPOMapping]] = Field(
+        default=None,
+        description="Clinical features mapped to HPO terms"
+    )
+
+    # Monarch search results
+    monarch_search_summary: Optional[MonarchSearchSummary] = Field(
+        default=None,
+        description="Summary of diseases found in Monarch knowledge graph"
+    )
+
+    # Top diseases from Monarch (for graph visualization)
+    top_monarch_matches: Optional[List[MonarchMatch]] = Field(
+        default=None,
+        description="Top 20 diseases from Monarch knowledge graph search"
+    )
+
+    # Detailed scoring breakdown for all diseases
+    scoring_details: Optional[List[ScoringBreakdown]] = Field(
+        default=None,
+        description="Detailed scoring for all evaluated diseases"
+    )
 
 
 # Common phenotype patterns for muscular dystrophies

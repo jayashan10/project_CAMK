@@ -10,12 +10,13 @@ This is a knowledge graph-driven clinical decision support system for rare muscu
 
 ## Tech Stack
 
-- **Backend:** Python (FastAPI planned)
-- **Graph Database:** Neo4j (with in-memory fallback for development)
-- **Vector Database:** ChromaDB/Pinecone (planned)
-- **LLM:** OpenAI GPT-4 / Claude (planned)
-- **RAG:** LangChain (planned)
-- **Frontend:** React + Next.js (planned)
+- **Backend:** Python with FastAPI (`backend/api/`)
+- **Graph Database:** Neo4j with Monarch Initiative database (1.3M+ nodes, 14.7M+ relationships)
+- **In-memory Fallback:** Custom memory store for clinical data when Neo4j unavailable
+- **Variant Database:** NCBI ClinVar API (E-utilities) with 30-day caching
+- **RAG:** Google Gemini File Search API for clinical guideline retrieval
+- **Frontend:** React + Next.js with TypeScript (`frontend/`)
+- **Deployment:** Uvicorn ASGI server (backend), Next.js dev server (frontend)
 
 ## Development Setup
 
@@ -71,9 +72,13 @@ The project uses **Neo4j** with the **Monarch Initiative** knowledge graph datab
    NEO4J_DATABASE=monarch
    ```
 
-**Fallback Behavior:**
-- **With Neo4j:** Connects to Monarch database and uses real-world biomedical data
-- **Without Neo4j:** Automatically falls back to in-memory knowledge store seeded from [backend/knowledge_graph/seed_data.py](backend/knowledge_graph/seed_data.py)
+**Data Sources:**
+- **Disease/Gene/Phenotype Data:** Monarch Initiative database (1.3M+ nodes, 255K+ disease-phenotype associations)
+- **Clinical Decision Support:** Curated data from [backend/knowledge_graph/clinical_data.py](backend/knowledge_graph/clinical_data.py)
+  - Treatment recommendations with evidence levels
+  - Variant annotations (exon deletions, reading frame rules, therapy eligibility)
+  - Diagnostic pathways
+- **Fallback:** In-memory store for clinical data when Neo4j unavailable
 
 **Testing Connection:**
 ```bash
@@ -89,6 +94,109 @@ The Monarch Initiative uses the **Biolink Model** schema (e.g., `biolink:Disease
 1. Create an adapter layer to translate between schemas
 2. Write new queries matching Monarch's schema
 3. Use both databases (custom for project-specific data, Monarch for broader biomedical knowledge)
+
+### ClinVar Setup (Optional - Variant Enrichment)
+
+The project integrates with **NCBI ClinVar** to enrich variant annotations with clinical significance data from multiple laboratories. This is used as a **showcase feature** - the curated `clinical_data.py` remains authoritative for reading frame predictions and therapy eligibility.
+
+**Why Use ClinVar:**
+- Multi-lab consensus on clinical significance (Pathogenic/Benign/VUS)
+- Review status and confidence metrics
+- Comprehensive variant catalogs for DMD, LAMA2, and CAPN3 genes
+- Rich genomic coordinate and phenotype data
+- **NOT** a replacement for `clinical_data.py` (ClinVar lacks reading frame rules and therapy eligibility)
+
+**Setup Steps:**
+
+1. **Get Free NCBI API Key** (recommended for higher rate limits):
+   - Create account at https://www.ncbi.nlm.nih.gov/account/
+   - Navigate to Settings → API Key Management
+   - Generate new API key
+   - **Rate limits:** 10 req/sec with API key, 3 req/sec without
+
+2. **Add to `.env` file:**
+   ```bash
+   # NCBI ClinVar Integration (optional)
+   NCBI_API_KEY=your_api_key_here
+   ENABLE_CLINVAR=true
+   ```
+
+3. **Verify Integration:**
+   ```bash
+   python test_clinvar_integration.py
+   ```
+   This test script verifies:
+   - API connectivity and authentication
+   - Rate limiting (respects NCBI guidelines)
+   - Caching mechanism (30-day TTL)
+   - Enrichment preserves critical fields (reading frame, therapy eligibility)
+   - Integration with KnowledgeGraphService
+
+**API Endpoints:**
+The project provides FastAPI endpoints for ClinVar integration:
+- `POST /api/variants/interpret` - Interpret variant with curated + ClinVar data
+- `GET /api/variants/search/{gene}` - Search variants by gene with ClinVar enrichment
+- `GET /api/variants/clinvar/gene/{gene}` - Direct ClinVar API query (showcase)
+- `GET /api/variants/therapies` - List FDA-approved therapies
+
+See [backend/api/routes/variants.py](backend/api/routes/variants.py) for full API documentation.
+
+**ClinVar Data Structure:**
+
+The NCBI E-utilities API returns 12 fields per variant (see [backend/knowledge_graph/clinvar_service.py](backend/knowledge_graph/clinvar_service.py)):
+
+```python
+{
+  "variation_id": "4526298",                    # Numeric ID
+  "clinvar_accession": "VCV004526298",          # VCV accession
+  "variant_name": "NC_000023.10:g.(...)del",    # HGVS notation
+  "clinical_significance": "Pathogenic",        # From germline_classification
+  "review_status": "criteria provided...",      # Review confidence
+  "last_evaluated": "2025/07/22 00:00",         # Evaluation date
+  "gene_symbol": "DMD",                         # Gene name
+  "variant_type": "Deletion",                   # Type (obj_type)
+  "chromosome": "X",                            # Chromosome
+  "position_start": "33038318",                 # Start position
+  "position_stop": "33229667",                  # End position
+  "assembly": "GRCh37",                         # Reference genome
+  "phenotypes": ["Neuromuscular disease..."]    # Associated diseases
+}
+```
+
+**IMPORTANT - API Response Structure:**
+NCBI ClinVar changed its API structure. The correct field paths are:
+- Clinical significance: `variant_data['germline_classification']['description']` (NOT `clinical_significance`)
+- Review status: `variant_data['germline_classification']['review_status']`
+- Variant type: `variant_data['obj_type']` or `variation_set[0]['variant_type']`
+- Phenotypes: `germline_classification['trait_set'][]['trait_name']`
+- Location: `variation_set[0]['variation_loc'][0]` (chr, start, stop, assembly)
+
+**Frontend Display:**
+The frontend displays ClinVar data in a 7-column table:
+1. **Accession** - Clickable VCV link
+2. **Variant** - HGVS notation (truncated with tooltip)
+3. **Type** - Deletion/Duplication/SNV with blue badge
+4. **Significance** - Color-coded (🔴 Pathogenic, 🟢 Benign, 🟡 Uncertain)
+5. **Review Status** - With evaluation date
+6. **Location** - Chr:start-stop (assembly)
+7. **Phenotype** - Associated disease/condition
+
+See [frontend/components/ResultsPanel/index.tsx](frontend/components/ResultsPanel/index.tsx) lines 477-606 for table implementation.
+
+**What Gets Enriched:**
+- Gene-level queries for deletions (shows related DMD variants as reference)
+- Point mutations and small indels get clinical significance labels
+- Large exon deletions keep authoritative data from `clinical_data.py`
+- **ClinVar adds:** All 12 fields above as `clinvar_variants` array
+- **ClinVar NEVER overwrites:** `reading_frame`, `eligible_treatments`, `exons`
+
+**Caching:**
+- API responses cached for 30 days in `.clinvar_cache/` directory
+- Minimizes API calls and respects rate limits
+- Cache automatically invalidates after 30 days
+
+**Disabling ClinVar:**
+Set `ENABLE_CLINVAR=false` in `.env` or remove the variable. The system will function normally without ClinVar enrichment.
 
 ### Running Notebooks
 ```bash
@@ -135,20 +243,26 @@ Main orchestration logic that:
 - Lab value interpretation (+15 for elevated CK)
 
 #### 3. Knowledge Graph Service ([backend/knowledge_graph/service.py](backend/knowledge_graph/service.py))
-Dual-mode service that abstracts storage:
-- **Neo4j mode:** Connects to Neo4j database (Monarch Initiative or custom schema)
-- **In-memory mode:** Python dictionaries seeded from `seed_data.py` (automatic fallback)
+Hybrid service combining real-world biomedical data with curated clinical guidelines:
+
+**Data Sources:**
+- **Monarch Database:** Disease profiles, gene associations, phenotype mappings (via `MonarchService`)
+- **Clinical Data File:** Treatment recommendations, variant annotations, diagnostic pathways (via `clinical_data.py`)
+
+**Architecture:**
+- Queries Monarch Initiative for disease/gene/phenotype data (1.3M+ nodes)
+- Supplements with curated clinical decision support from `clinical_data.py`
+- Falls back to in-memory store when Neo4j unavailable
 
 **Connection Logic:**
 - Reads environment variables (`NEO4J_URI`, `NEO4J_USER`, `NEO4J_PASSWORD`, `NEO4J_DATABASE`)
-- Attempts Neo4j connection on initialization
-- Falls back to in-memory store if connection fails or variables not set
+- Connects to Monarch Neo4j database on initialization
+- Falls back to in-memory + cached Monarch data if connection fails
 - Logs connection status for debugging
 
-**Current Schema Support:**
-The service queries expect the **custom schema** defined in `schema.py`:
-- Node labels: `Disease`, `Gene`, `Phenotype`, `Variant`, `Treatment`, etc.
-- Relationships: `HAS_PHENOTYPE`, `CAUSED_BY_MUTATION_IN`, `ELIGIBLE_FOR`, etc.
+**Schema Support:**
+- Uses **Biolink Model** schema from Monarch (`biolink:Disease`, `biolink:Gene`, `biolink:PhenotypicFeature`)
+- Clinical data uses project-specific schema (treatment categories, variant reading frames, etc.)
 
 **Monarch Initiative Schema:**
 The Monarch database uses **Biolink Model** schema:
@@ -156,9 +270,10 @@ The Monarch database uses **Biolink Model** schema:
 - Relationships: `biolink:has_phenotype`, `biolink:causes`, `biolink:gene_associated_with_condition`, etc.
 
 **Key Methods:**
-- `get_disease_profiles()`: Returns disease metadata, phenotypes, and diagnostic tests (custom schema)
-- `get_variant_annotations()`: Returns variant-to-phenotype and variant-to-treatment mappings
-- `get_treatment_recommendations()`: Disease-specific management guidelines
+- `get_disease_profiles()`: Returns disease metadata and phenotypes (Monarch) / legacy schema
+- `get_variant_annotations()`: Variant → gene associations, falls back to legacy annotations
+- `get_treatment_recommendations()`: Disease-specific management guidelines (custom/fallback)
+- `search_diseases_by_phenotypes(hpo_ids)`: Ranks diseases based on Monarch phenotype overlap (feeds ScenarioProcessor scoring)
 
 **Note:** To query Monarch data, you'll need to write Cypher queries using `biolink:` prefixed labels and relationship types, or create an adapter layer.
 
@@ -178,12 +293,15 @@ Note: Labels with colons must be escaped with backticks in Cypher: `` `biolink:D
 #### 4. Knowledge Graph Schema ([backend/knowledge_graph/schema.py](backend/knowledge_graph/schema.py))
 Defines the graph model with nodes (Disease, Gene, Phenotype, Variant, Treatment, etc.) and relationships (HAS_PHENOTYPE, CAUSED_BY_MUTATION_IN, ELIGIBLE_FOR, etc.). Schema applies to both Neo4j and in-memory implementations.
 
-#### 5. Seed Data ([backend/knowledge_graph/seed_data.py](backend/knowledge_graph/seed_data.py))
-Curated domain knowledge including:
-- Disease profiles with clinical features and onset patterns
-- Variant annotations with reading frame predictions
-- Treatment recommendations with evidence levels
-- Diagnostic pathways
+#### 5. Clinical Data ([backend/knowledge_graph/clinical_data.py](backend/knowledge_graph/clinical_data.py))
+Curated clinical decision support data **not available in Monarch**:
+- **Treatment recommendations:** Evidence-based guidelines (Level A/B/C) with urgency classifications
+- **Variant annotations:** DMD exon deletions with reading frame rules and FDA therapy eligibility
+- **Diagnostic pathways:** Step-by-step clinical workflows (elevated CK pathway, infant hypotonia pathway)
+- **General recommendations:** Fallback guidance when diagnosis uncertain
+
+**Note:** Disease/gene/phenotype data now comes from Monarch database, not this file.
+**Archived:** Previous `seed_data.py` moved to `backend/temp_archived/seed_data.py.archived`
 
 ### Data Flow Example
 
@@ -248,10 +366,12 @@ Based on git history and code structure:
 - ✅ Neo4j connection to Monarch Initiative database (1.3M+ nodes, 14.7M+ relationships)
 - ✅ Database connection testing scripts (`test_monarch_database.py`, `test_neo4j_connection.py`)
 - ✅ Demonstration notebook with 4 test cases
+- ✅ **FastAPI backend** (`backend/api/`) with routes for scenarios, variants, knowledge graph, and RAG
+- ✅ **ClinVar integration** (`backend/knowledge_graph/clinvar_service.py`) with 4 API endpoints and 12-field data structure
+- ✅ **Gemini RAG pipeline** (`backend/rag/gemini_file_search.py`) for clinical guideline retrieval
+- ✅ **Next.js frontend** (`frontend/`) with React components for scenario submission and results display
+- ✅ **Variant interpretation UI** with 7-column ClinVar table showing clinical significance, genomic coordinates, and phenotypes
 - ⚠️ Schema adapter needed (Monarch uses `biolink:` schema, project uses custom schema)
-- ❌ FastAPI endpoints (planned, see README)
-- ❌ RAG pipeline for literature (planned)
-- ❌ Frontend interface (planned)
 
 ## Testing Approach
 
@@ -288,13 +408,18 @@ Treatment recommendations include evidence levels (Level A/B/C) and urgency clas
 
 ## Adding New Diseases
 
-To add a new muscular dystrophy:
-1. Add disease profile to `DISEASES` list in [backend/knowledge_graph/seed_data.py](backend/knowledge_graph/seed_data.py)
-2. Include phenotypes with HPO IDs and specificity scores
-3. Add diagnostic tests with frequency recommendations
-4. Add treatment recommendations to `TREATMENT_RECOMMENDATIONS` list
-5. Re-seed the knowledge graph (automatic on next run)
-6. Update scoring logic in `ScenarioProcessor` if needed for disease-specific rules
+**Disease data now comes from Monarch Initiative** (1.3M+ nodes). To add support for a new muscular dystrophy:
+
+1. **Add disease mapping** to `DISEASE_CODE_MAP` in [backend/knowledge_graph/monarch_mapper.py](backend/knowledge_graph/monarch_mapper.py)
+   - Map project code (e.g., "LGMD2I") to Monarch IDs (e.g., MONDO:xxx, OMIM:xxx)
+2. **Add treatment recommendations** to `TREATMENT_RECOMMENDATIONS` in [backend/knowledge_graph/clinical_data.py](backend/knowledge_graph/clinical_data.py)
+   - Include evidence levels (Level A/B/C) and urgency classifications
+3. **Add variant annotations** (if applicable) to `VARIANT_ANNOTATIONS` in [backend/knowledge_graph/clinical_data.py](backend/knowledge_graph/clinical_data.py)
+   - Include exon numbers, reading frame predictions, therapy eligibility
+4. **Update scoring logic** in `ScenarioProcessor` if needed for disease-specific rules (e.g., age-appropriate onset windows)
+5. **Verify in Monarch** that the disease exists with adequate phenotype associations
+
+**Note:** No database seeding required - Monarch data is already loaded!
 
 ## File Organization
 
@@ -303,11 +428,16 @@ backend/
 ├── core/
 │   ├── clinical_scenario.py      # Pydantic models (input/output schema)
 │   └── scenario_processor.py     # Main processing pipeline
-└── knowledge_graph/
-    ├── schema.py                  # Graph schema definition (custom schema)
-    ├── service.py                 # Knowledge retrieval service (Neo4j + in-memory)
-    ├── seed_data.py               # Curated clinical domain knowledge
-    └── memory.py                  # In-memory store implementation (if separate)
+├── knowledge_graph/
+│   ├── schema.py                  # Graph schema definition (custom schema, legacy)
+│   ├── service.py                 # Hybrid service (Monarch + clinical data)
+│   ├── monarch_service.py         # Monarch Initiative query layer
+│   ├── monarch_mapper.py          # Biolink ↔ project schema mapping (disease/gene IDs)
+│   ├── clinical_data.py           # Curated clinical guidelines (treatments, variants, pathways)
+│   └── memory.py                  # In-memory store (fallback)
+└── temp_archived/
+    ├── seed_data.py.archived      # DEPRECATED: Replaced by Monarch + clinical_data
+    └── README.md                  # Migration notes
 
 docs/
 ├── pdfs/                          # Original project documentation (PDFs)
@@ -325,6 +455,7 @@ notebooks/
 # Testing and utilities
 test_monarch_database.py           # Explore Monarch Initiative database schema
 test_neo4j_connection.py          # Test Neo4j connection and basic queries
+test_monarch_integration.py       # Smoke tests for KnowledgeGraphService + Monarch
 .env                                # Neo4j connection configuration (not in git)
 ```
 

@@ -1,8 +1,11 @@
 """Clinical Scenario Processor - Main orchestration logic backed by knowledge graph."""
+import logging
 from typing import Dict, List, Optional
 from datetime import datetime
 
 from backend.knowledge_graph.service import KnowledgeGraphService
+
+logger = logging.getLogger(__name__)
 
 from .clinical_scenario import (
     ClinicalScenario,
@@ -10,9 +13,14 @@ from .clinical_scenario import (
     DifferentialDiagnosis,
     ClinicalRecommendation,
     GeneticFinding,
+    MonarchMatch,
+    MonarchSearchSummary,
+    ScoringBreakdown,
+    ScoringComponent,
     extract_hpo_terms,
     calculate_phenotype_similarity,
 )
+from . import scoring_config
 
 
 class ScenarioProcessor:
@@ -29,11 +37,19 @@ class ScenarioProcessor:
 
     def process_scenario(self, scenario: ClinicalScenario) -> ScenarioResponse:
         """Main processing pipeline for clinical scenarios."""
+        import logging
+        logger = logging.getLogger(__name__)
+
         # Step 1: Extract clinical features and map to HPO terms
         hpo_terms = extract_hpo_terms(scenario.presenting_symptoms)
+        logger.info(f"📝 Extracted {len(hpo_terms)} HPO mappings from symptoms")
 
-        # Step 2: Generate differential diagnosis
-        differential = self._generate_differential_diagnosis(scenario, hpo_terms)
+        # Step 2: Generate differential diagnosis (with detailed reasoning capture)
+        differential_result = self._generate_differential_diagnosis_with_details(scenario, hpo_terms)
+        differential = differential_result["differential"]
+        monarch_summary = differential_result.get("monarch_summary")
+        top_monarch = differential_result.get("top_monarch")
+        scoring_details = differential_result.get("scoring_details")
 
         # Step 3: Interpret genetic findings if present
         variant_interpretation = None
@@ -58,7 +74,7 @@ class ScenarioProcessor:
             recommendations,
         )
 
-        # Step 6: Compile response
+        # Step 6: Compile response with enhanced reasoning data
         return ScenarioResponse(
             scenario_id=scenario.scenario_id or f"scenario_{datetime.now().timestamp()}",
             differential_diagnoses=differential,
@@ -68,6 +84,11 @@ class ScenarioProcessor:
             question_answers=question_answers,
             overall_confidence=differential[0].confidence_score if differential else 0,
             limitations=self._identify_limitations(scenario),
+            # Enhanced reasoning flow data
+            hpo_mappings=hpo_terms if hpo_terms else None,
+            monarch_search_summary=monarch_summary,
+            top_monarch_matches=top_monarch,
+            scoring_details=scoring_details,
         )
 
     def _generate_differential_diagnosis(
@@ -76,13 +97,32 @@ class ScenarioProcessor:
         hpo_terms,
     ) -> List[DifferentialDiagnosis]:
         """Generate differential diagnosis based on clinical presentation."""
+        import logging
+        logger = logging.getLogger(__name__)
+
         differentials = []
+        hpo_ids = [mapping.hpo_id for mapping in hpo_terms if mapping.hpo_id]
+
+        logger.info(f"🧬 ScenarioProcessor: Extracted {len(hpo_ids)} HPO IDs from symptoms: {hpo_ids}")
+
+        phenotype_matches = (
+            self.knowledge_service.search_diseases_by_phenotypes(hpo_ids) if hpo_ids else []
+        )
+        monarch_match_map = {match["code"]: match for match in phenotype_matches}
+
+        logger.info(f"🏥 ScenarioProcessor: Scoring {len(self.disease_profiles)} disease profiles")
+        all_scores = []
 
         for disease_code, profile in self.disease_profiles.items():
             score = self._calculate_disease_match_score(scenario, profile)
+            base_score = score
 
             if scenario.patient.sex == "male" and profile.get("inheritance") == "X-linked":
                 score += 10
+
+            match_info = monarch_match_map.get(disease_code)
+            if match_info:
+                score += match_info["match_count"] * 5
 
             if scenario.lab_results:
                 for lab in scenario.lab_results:
@@ -103,6 +143,8 @@ class ScenarioProcessor:
                 elif disease_code == "LAMA2-CMD" and age_value < 2:
                     score += 15
 
+            all_scores.append((disease_code, score, base_score))
+
             if score > 30:
                 diff = DifferentialDiagnosis(
                     disease_name=disease_code,
@@ -113,26 +155,216 @@ class ScenarioProcessor:
                 )
                 differentials.append(diff)
 
+        # Log all scores for debugging
+        logger.info(f"📊 Disease Scoring Results (ALL {len(all_scores)} diseases):")
+        all_scores.sort(key=lambda x: x[1], reverse=True)
+        for i, (code, final_score, base_score) in enumerate(all_scores[:20], 1):
+            status = "✅ INCLUDED" if final_score > 30 else "❌ EXCLUDED (score ≤ 30)"
+            logger.info(f"   {i}. [{code}] Final={final_score}, Base={base_score} - {status}")
+
         differentials.sort(key=lambda x: x.confidence_score, reverse=True)
+        logger.info(f"🎯 ScenarioProcessor: Returning top {min(5, len(differentials))} diagnoses (out of {len(differentials)} with score > 30)")
+
         return differentials[:5]
+
+    def _generate_differential_diagnosis_with_details(
+        self,
+        scenario: ClinicalScenario,
+        hpo_terms,
+    ) -> Dict:
+        """Generate differential diagnosis with full reasoning details for visualization."""
+        import logging
+        from collections import defaultdict
+        logger = logging.getLogger(__name__)
+
+        differentials = []
+        scoring_breakdowns = []
+        hpo_ids = [mapping.hpo_id for mapping in hpo_terms if mapping.hpo_id]
+
+        logger.info(f"🧬 ScenarioProcessor: Extracted {len(hpo_ids)} HPO IDs from symptoms: {hpo_ids}")
+
+        # Search Monarch knowledge graph
+        phenotype_matches = (
+            self.knowledge_service.search_diseases_by_phenotypes(hpo_ids) if hpo_ids else []
+        )
+        monarch_match_map = {match["code"]: match for match in phenotype_matches}
+
+        # Create Monarch summary
+        match_count_distribution = defaultdict(int)
+        for match in phenotype_matches:
+            match_count_distribution[str(match["match_count"])] += 1
+
+        monarch_summary = MonarchSearchSummary(
+            total_diseases_found=len(phenotype_matches),
+            hpo_ids_searched=hpo_ids,
+            diseases_by_match_count=dict(match_count_distribution)
+        )
+
+        # Get top 20 Monarch matches for graph visualization
+        top_monarch_matches = [
+            MonarchMatch(
+                disease_id=match["disease_id"],
+                disease_name=match["disease_name"],
+                match_count=match["match_count"],
+                matched_hpo_ids=match["matched_hpo_ids"],
+                code=match.get("code")
+            )
+            for match in phenotype_matches[:20]
+        ]
+
+        logger.info(f"🏥 ScenarioProcessor: Scoring {len(self.disease_profiles)} disease profiles")
+
+        # Score all diseases and capture detailed breakdown
+        for disease_code, profile in self.disease_profiles.items():
+            base_score = self._calculate_disease_match_score(scenario, profile)
+            score = base_score
+            components = []
+
+            # Component 1: Base phenotype matching
+            if base_score > 0:
+                components.append(ScoringComponent(
+                    component_name="Phenotype Matching",
+                    points_added=base_score,
+                    reasoning=f"Matched clinical features from disease profile"
+                ))
+
+            # Component 2: X-linked inheritance bonus
+            if scenario.patient.sex == "male" and profile.get("inheritance") == "X-linked":
+                components.append(ScoringComponent(
+                    component_name="Sex/Inheritance Match",
+                    points_added=scoring_config.SEX_INHERITANCE_MATCH_WEIGHT,
+                    reasoning="Male patient with X-linked disease"
+                ))
+                score += scoring_config.SEX_INHERITANCE_MATCH_WEIGHT
+
+            # Component 3: Monarch phenotype overlap bonus
+            match_info = monarch_match_map.get(disease_code)
+            if match_info:
+                monarch_bonus = match_info["match_count"] * scoring_config.MONARCH_HPO_MATCH_MULTIPLIER
+                components.append(ScoringComponent(
+                    component_name="Monarch HPO Overlap",
+                    points_added=float(monarch_bonus),
+                    reasoning=f"{match_info['match_count']} HPO terms matched in Monarch"
+                ))
+                score += monarch_bonus
+
+            # Component 4: Lab results bonus
+            if scenario.lab_results:
+                for lab in scenario.lab_results:
+                    if (
+                        lab.test_name == "Creatine Kinase"
+                        and lab.interpretation
+                        and any(keyword in lab.interpretation.lower() for keyword in scoring_config.ELEVATED_CK_KEYWORDS)
+                        and disease_code in scoring_config.DISEASES_WITH_ELEVATED_CK
+                    ):
+                        components.append(ScoringComponent(
+                            component_name="Elevated CK",
+                            points_added=scoring_config.ELEVATED_CK_WEIGHT,
+                            reasoning="Elevated creatine kinase supports muscular dystrophy"
+                        ))
+                        score += scoring_config.ELEVATED_CK_WEIGHT
+
+            # Component 5: Age appropriateness bonus
+            age_value = self._extract_age_years(scenario.patient.age)
+            if age_value is not None:
+                # Check age ranges from config
+                if disease_code in scoring_config.DISEASE_AGE_RANGES:
+                    age_range = scoring_config.DISEASE_AGE_RANGES[disease_code]
+                    min_age = age_range.get("min", 0)
+                    max_age = age_range.get("max")
+
+                    is_age_appropriate = False
+                    if max_age is None:
+                        is_age_appropriate = age_value >= min_age
+                    else:
+                        is_age_appropriate = min_age <= age_value <= max_age
+
+                    if is_age_appropriate:
+                        # Get disease-specific weight
+                        if disease_code == "DMD":
+                            weight = scoring_config.AGE_APPROPRIATE_DMD_WEIGHT
+                            range_desc = f"{min_age}-{max_age} years"
+                        elif disease_code == "BMD":
+                            weight = scoring_config.AGE_APPROPRIATE_BMD_WEIGHT
+                            range_desc = f">{min_age} years"
+                        elif disease_code == "LAMA2-CMD":
+                            weight = scoring_config.AGE_APPROPRIATE_CMD_WEIGHT
+                            range_desc = f"<{max_age} years"
+                        else:
+                            weight = 10.0  # Default weight for unlisted diseases
+                            range_desc = f"{min_age}-{max_age if max_age else '∞'} years"
+
+                        components.append(ScoringComponent(
+                            component_name="Age-Appropriate Onset",
+                            points_added=weight,
+                            reasoning=f"Patient age {age_value} within typical {disease_code} onset ({range_desc})"
+                        ))
+                        score += weight
+
+            # Create scoring breakdown
+            included = score > scoring_config.DIFFERENTIAL_INCLUSION_THRESHOLD
+            exclusion_reason = None if included else f"Score {score:.1f} ≤ threshold ({scoring_config.DIFFERENTIAL_INCLUSION_THRESHOLD})"
+
+            scoring_breakdowns.append(ScoringBreakdown(
+                disease_code=disease_code,
+                disease_name=profile.get("name", disease_code),
+                base_score=base_score,
+                scoring_components=components,
+                final_score=score,
+                included_in_differential=included,
+                exclusion_reason=exclusion_reason
+            ))
+
+            # Add to differential if passes threshold
+            if included:
+                diff = DifferentialDiagnosis(
+                    disease_name=disease_code,
+                    confidence_score=min(score, scoring_config.MAX_CONFIDENCE_SCORE),
+                    supporting_features=self._get_supporting_features(scenario, profile),
+                    inconsistent_features=self._get_inconsistent_features(scenario, profile),
+                    recommended_tests=profile.get("diagnostic_tests", []),
+                )
+                differentials.append(diff)
+
+        # Sort and log
+        differentials.sort(key=lambda x: x.confidence_score, reverse=True)
+        scoring_breakdowns.sort(key=lambda x: x.final_score, reverse=True)
+
+        logger.info(f"📊 Disease Scoring Results: {len(scoring_breakdowns)} diseases scored")
+        logger.info(f"🎯 Returning top {min(scoring_config.MAX_DIFFERENTIAL_DIAGNOSES, len(differentials))} diagnoses (out of {len(differentials)} with score > {scoring_config.DIFFERENTIAL_INCLUSION_THRESHOLD})")
+
+        return {
+            "differential": differentials[:scoring_config.MAX_DIFFERENTIAL_DIAGNOSES],
+            "monarch_summary": monarch_summary,
+            "top_monarch": top_monarch_matches,
+            "scoring_details": scoring_breakdowns
+        }
 
     def _interpret_variants(
         self,
         genetic_findings: List[GeneticFinding],
         primary_diagnosis: Optional[str],
     ) -> Dict:
-        """Interpret genetic variants in clinical context."""
+        """Interpret genetic variants using curated variant annotations and ClinVar enrichment."""
         interpretations: Dict[str, Dict] = {}
 
         for finding in genetic_findings:
-            if not finding.variant_type:
-                continue
+            # Build basic variant info
+            interpretation = {
+                "gene": finding.gene,
+                "variant": finding.variant,
+                "variant_type": finding.variant_type,
+                "zygosity": finding.zygosity,
+                "exons": finding.exons_affected,
+            }
 
+            # Try to get variant annotations from curated database
             annotations = self.knowledge_service.get_variant_annotations(
                 gene=finding.gene,
                 variant_type=finding.variant_type,
             )
 
+            # Look for matching annotation from our curated database
             matched = None
             if finding.exons_affected:
                 exon_set = set(finding.exons_affected)
@@ -140,24 +372,53 @@ class ScenarioProcessor:
                     annotated_exons = set(annotation.get("exons", []))
                     if annotated_exons == exon_set:
                         matched = annotation
+                        logger.info(f"✅ Matched curated variant: {finding.gene} exons {finding.exons_affected}")
+                        if annotation.get("notes"):
+                            logger.info(f"   Note: {annotation.get('notes')}")
                         break
 
+            # Use curated annotation data if available
             if matched:
-                interpretation = {
-                    "gene": finding.gene,
-                    "variant": finding.variant,
-                    "variant_type": finding.variant_type,
-                    "reading_frame": matched.get("reading_frame"),
-                    "predicted_phenotype": matched.get("predicted_phenotype"),
-                    "severity": matched.get("severity"),
-                    "eligible_treatments": matched.get("eligible_treatments", []),
-                }
-            else:
-                interpretation = self._fallback_dmd_variant_interpretation(finding)
+                # Add curated clinical data
+                if matched.get("reading_frame"):
+                    interpretation["reading_frame"] = matched.get("reading_frame")
+                if matched.get("predicted_phenotype"):
+                    interpretation["predicted_phenotype"] = matched.get("predicted_phenotype")
+                if matched.get("severity"):
+                    interpretation["severity"] = matched.get("severity")
+                if matched.get("eligible_treatments"):
+                    interpretation["eligible_treatments"] = matched.get("eligible_treatments")
+                    logger.info(f"   Eligible therapies: {', '.join(matched.get('eligible_treatments', []))}")
 
-            if interpretation:
-                key = f"{finding.gene}_{finding.variant or '_'.join(str(x) for x in (finding.exons_affected or []))}"
-                interpretations[key] = interpretation
+                # Add ClinVar enrichment data if available
+                if matched.get("clinvar_id"):
+                    interpretation["clinvar_id"] = matched.get("clinvar_id")
+                if matched.get("clinvar_significance"):
+                    interpretation["clinvar_significance"] = matched.get("clinvar_significance")
+                if matched.get("clinvar_review_status"):
+                    interpretation["clinvar_review_status"] = matched.get("clinvar_review_status")
+
+                # Add ClinVar variants table data if available
+                if matched.get("clinvar_variants"):
+                    interpretation["clinvar_variants"] = matched.get("clinvar_variants")
+                    logger.info(f"   ClinVar variants table: {len(matched.get('clinvar_variants'))} variants")
+                if matched.get("clinvar_gene_summary"):
+                    interpretation["clinvar_gene_summary"] = matched.get("clinvar_gene_summary")
+
+                # Add HGVS and protein change if available
+                if matched.get("hgvs"):
+                    interpretation["hgvs"] = matched.get("hgvs")
+                if matched.get("protein_change"):
+                    interpretation["protein_change"] = matched.get("protein_change")
+            else:
+                # No exact match found - try fallback interpretation for DMD deletions
+                logger.info(f"⚠️ No curated match for {finding.gene} variant, using fallback interpretation")
+                fallback = self._fallback_dmd_variant_interpretation(finding)
+                if fallback:
+                    interpretation.update(fallback)
+
+            key = f"{finding.gene}_{finding.variant or '_'.join(str(x) for x in (finding.exons_affected or []))}"
+            interpretations[key] = interpretation
 
         return interpretations
 
@@ -230,6 +491,12 @@ class ScenarioProcessor:
                             evidence_level=rec.get("evidence_level"),
                             urgency=rec.get("urgency"),
                             references=rec.get("references"),
+                            # RAG-specific fields (present for RAG-sourced recommendations)
+                            source_type=rec.get("source_type"),
+                            citation=rec.get("citation"),
+                            confidence=rec.get("confidence"),
+                            chunk_id=rec.get("chunk_id"),
+                            retrieved_text=rec.get("retrieved_text"),
                         )
                     )
             else:
@@ -253,6 +520,12 @@ class ScenarioProcessor:
                     evidence_level=rec.get("evidence_level"),
                     urgency=rec.get("urgency"),
                     references=rec.get("references"),
+                    # RAG-specific fields (present for RAG-sourced recommendations)
+                    source_type=rec.get("source_type"),
+                    citation=rec.get("citation"),
+                    confidence=rec.get("confidence"),
+                    chunk_id=rec.get("chunk_id"),
+                    retrieved_text=rec.get("retrieved_text"),
                 )
             )
 
@@ -400,7 +673,7 @@ class ScenarioProcessor:
             limitations.append("No genetic data available - interpretation based on clinical features only")
         if not scenario.imaging_findings:
             limitations.append("No imaging data available")
-        if not scenario.family_history:
+        if not scenario.patient.family_history:
             limitations.append("Family history not provided - inheritance pattern unclear")
 
         return limitations

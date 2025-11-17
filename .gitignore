@@ -40,3 +40,7 @@ Temporary Items
 .env
 .env.local
 .env.backup
+
+# ClinVar API cache
+.clinvar_cache/
+.clinvar_data/

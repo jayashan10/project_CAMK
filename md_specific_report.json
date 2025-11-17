@@ -1,0 +1,897 @@
+{
+  "dmd_search": [
+    {
+      "id": "MONDO:1010199",
+      "name": "muscular dystrophy, Duchenne type, non-human animal",
+      "synonyms": null,
+      "description": "Muscular dystrophy, Duchenne type that occurs in non-human animals."
+    },
+    {
+      "id": "MONDO:1010923",
+      "name": "muscular dystrophy, Duchenne type, dog",
+      "synonyms": null,
+      "description": "Muscular dystrophy, Duchenne type that occurs in dog."
+    },
+    {
+      "id": "MONDO:0010679",
+      "name": "Duchenne muscular dystrophy",
+      "synonyms": [
+        "DMD",
+        "Duchenne muscular dystrophy",
+        "Duchenne muscular dystrophy, X-linked recessive",
+        "muscular dystrophy, Duchenne",
+        "muscular dystrophy, Duchenne type",
+        "muscular dystrophy, pseudohypertrophic progressive, Duchenne type",
+        "severe dystrophinopathy, Duchenne type"
+      ],
+      "description": "Duchenne muscular dystrophy (DMD) is a neuromuscular disease characterized by rapidly progressive muscle weakness and wasting due to degeneration of skeletal, smooth and cardiac muscle."
+    },
+    {
+      "id": "MONDO:0016899",
+      "name": "obsolete Duchenne and Becker muscular dystrophy",
+      "synonyms": [
+        "severe dystrophinopathy, Duchenne and Becker type"
+      ],
+      "description": "OBSOLETE. Duchenne and Becker muscular dystrophies (DMD and BMD) are neuromuscular diseases characterized by progressive muscle wasting and weakness due to degeneration of skeletal, smooth and cardiac muscle."
+    },
+    {
+      "id": "MONDO:0700303",
+      "name": "Erb palsy",
+      "synonyms": [
+        "Erb-Duchenne paralysis"
+      ],
+      "description": "A palsy characterized by a paralysis of the arm caused by an injury to the upper group of the main nerves supplying it, specifically the upper trunk C5-C6 of the brachial plexus. Erb palsy most commonly, though not exclusively, arises as a result of an injury sustained during birth."
+    },
+    {
+      "id": "MONDO:0009677",
+      "name": "autosomal recessive limb-girdle muscular dystrophy type 2C",
+      "synonyms": [
+        "Adhalin deficiency, secondary",
+        "DMDA1",
+        "Dmda",
+        "Duchenne-like muscular dystrophy, autosomal recessive, type 1",
+        "LGMD2C",
+        "Maghrebian myopathy",
+        "SCARMD",
+        "SGCG autosomal recessive limb-girdle muscular dystrophy",
+        "autosomal recessive Duchenne-like muscular dystrophy type 1",
+        "autosomal recessive limb-girdle muscular dystrophy caused by mutation in SGCG",
+        "autosomal recessive limb-girdle muscular dystrophy type 2C",
+        "deficiency of sarcoglycan gamma",
+        "gamma-sarcoglycanopathy",
+        "limb-girdle muscular dystrophy due to gamma-sarcoglycan deficiency",
+        "limb-girdle muscular dystrophy with gamma-sarcoglycan deficiency",
+        "limb-girdle muscular dystrophy, type 2C",
+        "muscular dystrophy, Duchenne-like",
+        "muscular dystrophy, limb-girdle, autosomal recessive 5",
+        "muscular dystrophy, limb-girdle, type 2C",
+        "sarcoglycan, gamma, deficiency of",
+        "severe childhood autosomal recessive muscular dystrophy North African type",
+        "severe childhood autosomal recessive muscular dystrophy, North African type"
+      ],
+      "description": "Autosomal recessive limb-girdle muscular dystrophy type 2C (LGMD2C) is a subtype of autosomal recessive limb-girdle muscular dystrophy characterized by a childhood onset of progressive shoulder and pelvic girdle muscle weakness and atrophy frequently associated with calf hypertrophy, diaphragmatic weakness, and/or variable cardiac abnormalities. Mild to moderate elevated serum creatine kinase levels and positive Gowers sign are reported."
+    },
+    {
+      "id": "MONDO:0011968",
+      "name": "autosomal recessive limb-girdle muscular dystrophy type 2D",
+      "synonyms": [
+        "Adhalinopathy, primary",
+        "Alpha-sarcoglycanopathy",
+        "DMDA2",
+        "Duchenne-like autosomal recessive muscular dystrophy type 2",
+        "Duchenne-like autosomal recessive muscular dystrophy, type 2",
+        "LGMD2D",
+        "SGCA autosomal recessive limb-girdle muscular dystrophy",
+        "autosomal recessive limb-girdle muscular dystrophy caused by mutation in SGCA",
+        "limb-girdle muscular dystrophy due to alpha-sarcoglycan deficiency",
+        "limb-girdle muscular dystrophy type 2D",
+        "limb-girdle muscular dystrophy, type 2D",
+        "muscular dystrophy limb-girdle with alpha-sarcoglycan",
+        "muscular dystrophy, limb-girdle, autosomal recessive 3",
+        "muscular dystrophy, limb-girdle, type 2D",
+        "primary adhalinopathy"
+      ],
+      "description": "Autosomal recessive limb-girdle muscular dystrophy type 2D (LGMD2D) is a subtype of autosomal recessive limb-girdle muscular dystrophy characterized by childhood onset of progressive proximal weakness of the shoulder and pelvic girdle muscles, resulting in difficulty walking, scapular winging, calf hypertrophy and contractures of the Achilles tendon, which lead to a tiptoe gait pattern. Cardiac and respiratory involvement is rare."
+    },
+    {
+      "id": "MONDO:0021824",
+      "name": "adult progressive spinal muscular atrophy, Aran Duchenne type",
+      "synonyms": [
+        "Aran Duchenne spinal muscular atrophy",
+        "adult SMA Aran Duchenne type",
+        "adult progressive spinal muscular atrophy Aran Duchenne type"
+      ],
+      "description": "A progressive muscle weakness and atrophy of the limbs that irregularly affects certain muscles, while it spares others."
+    },
+    {
+      "id": "MONDO:0016097",
+      "name": "symptomatic form of muscular dystrophy of Duchenne and Becker in female carriers",
+      "synonyms": null,
+      "description": "Symptomatic forms of Duchenne and Becker muscular dystrophies (DMD and BMD) in females carriers are characterized by variable degrees of muscle weakness due to progressive skeletal myopathy, sometimes associated with dilated cardiomyopathy or left ventricle dilation."
+    },
+    {
+      "id": "MONDO:1010924",
+      "name": "muscular dystrophy, Duchenne type, domestic cat",
+      "synonyms": null,
+      "description": "Muscular dystrophy, Duchenne type that occurs in domestic cat."
+    }
+  ],
+  "bmd_search": [
+    {
+      "id": "MONDO:0010311",
+      "name": "Becker muscular dystrophy",
+      "synonyms": [
+        "BMD",
+        "Becker dystrophinopathy",
+        "Becker muscular dystrophy",
+        "Becker muscular dystrophy, X-linked recessive",
+        "Becker's muscular dystrophy",
+        "benign congenital myopathy",
+        "benign pseudohypertrophic muscular dystrophy",
+        "muscular dystrophy pseudohypertrophic progressive, Becker type",
+        "muscular dystrophy, Becker type",
+        "muscular dystrophy, pseudohypertrophic progressive, Becker type"
+      ],
+      "description": "Becker muscular dystrophy (BMD) is a neuromuscular disease characterized by progressive muscle wasting and weakness due to degeneration of skeletal, smooth and cardiac muscle."
+    },
+    {
+      "id": "MONDO:0016899",
+      "name": "obsolete Duchenne and Becker muscular dystrophy",
+      "synonyms": [
+        "severe dystrophinopathy, Duchenne and Becker type"
+      ],
+      "description": "OBSOLETE. Duchenne and Becker muscular dystrophies (DMD and BMD) are neuromuscular diseases characterized by progressive muscle wasting and weakness due to degeneration of skeletal, smooth and cardiac muscle."
+    }
+  ],
+  "lama2_search": [
+    {
+      "id": "MONDO:0011925",
+      "name": "congenital merosin-deficient muscular dystrophy 1A",
+      "synonyms": [
+        "CMD1A",
+        "LAMA2 congenital muscular dystrophy",
+        "LAMA2-related muscular dystrophy",
+        "MDC1A",
+        "congenital merosin-deficient muscular dystrophy type 1A",
+        "congenital muscular dystrophy caused by mutation in LAMA2",
+        "congenital muscular dystrophy due to laminin alpha2 deficiency",
+        "congenital muscular dystrophy type 1A",
+        "laminin alpha-2 deficiency",
+        "merosin-deficient congenital muscular dystrophy",
+        "merosin-deficient congenital muscular dystrophy type 1A",
+        "merosin-negative congenital muscular dystrophy",
+        "muscular dystrophy, congenital merosin-deficient",
+        "muscular dystrophy, congenital merosin-deficient, 1A",
+        "muscular dystrophy, congenital merosin-deficient, type 1A",
+        "muscular dystrophy, congenital, due to partial LAMA2 deficiency",
+        "muscular dystrophy, congenital, merosin deficient or partially deficient",
+        "muscular dystrophy, congenital, merosin-deficient"
+      ],
+      "description": "Congenital muscular dystrophy type 1A (MCD1A) belongs to a group of neuromuscular disorders with onset at birth or infancy characterized by hypotonia, muscle weakness and muscle wasting."
+    },
+    {
+      "id": "MONDO:0100228",
+      "name": "LAMA2-related muscular dystrophy",
+      "synonyms": [
+        "LAMA2-related muscular dystrophy"
+      ],
+      "description": "Any muscular dystrophy in which the cause of the disease is a mutation in the LAMA2 gene."
+    },
+    {
+      "id": "MONDO:1012906",
+      "name": "congenital muscular dystrophy, LAMA2-related, dog",
+      "synonyms": null,
+      "description": "Any muscular dystrophy that occurs in dogs due to a mutation in the LAMA2 gene."
+    }
+  ],
+  "lgmd_search": [
+    {
+      "id": "MONDO:0009181",
+      "name": "epidermolysis bullosa simplex 5B, with muscular dystrophy",
+      "synonyms": [
+        "EBS-MD",
+        "EBSMD",
+        "Epidermolysa bullosa simplex and limb girdle muscular dystrophy",
+        "Epidermolysa bullosa simplex with muscular dystrophy",
+        "MD-EBS",
+        "MDEBS",
+        "epidermolysis bullosa simplex - limb girdle muscular dystrophy",
+        "epidermolysis bullosa simplex 5B, with muscular dystrophy",
+        "epidermolysis bullosa simplex and limb-girdle muscular dystrophy",
+        "epidermolysis bullosa simplex with muscular dystrophy",
+        "limb-girdle muscular dystrophy with epidermolysis bullosa simplex"
+      ],
+      "description": "A basal subtype of epidermolysis bullosa simplex (EBS) characterized by generalized blistering associated with muscular dystrophy."
+    },
+    {
+      "id": "MONDO:0014788",
+      "name": "autosomal recessive limb-girdle muscular dystrophy type 2W",
+      "synonyms": [
+        "LGMD2W",
+        "LIMS2 autosomal recessive limb-girdle muscular dystrophy",
+        "autosomal recessive limb-girdle muscular dystrophy caused by mutation in LIMS2",
+        "muscular dystrophy, autosomal recessive, with cardiomyopathy and triangular tongue",
+        "muscular dystrophy, limb-girdle, type 2W",
+        "muscular dystrophy, limb-girdle, type 2w"
+      ],
+      "description": "Autosomal recessive limb-girdle muscular dystrophy type 2W is a subtype of autosomal recessive limb girdle muscular dystrophy characterized by childhood onset of severe, progressive, proximal skeletal muscle weakness and atrophy of the upper and lower limbs with later involvement of distal muscles and development of severe quadraparesis, calf hypertrophy, triangular tongue, and dilated cardiomyopathy. Skeletal muscles undergo diffuse, bilateral, symmetric and severe atrophy with fat infiltration."
+    },
+    {
+      "id": "MONDO:0021569",
+      "name": "Emery-Dreifuss muscular dystrophy 2, autosomal dominant",
+      "synonyms": [
+        "EDMD2",
+        "EMD2",
+        "Emery-Dreifuss muscular dystrophy 2, autosomal dominant",
+        "Emery-Dreifuss muscular dystrophy, autosomal dominant",
+        "Hauptmann-Thannhauser muscular dystrophy",
+        "LGMD1B",
+        "LMNA autosomal dominant limb-girdle muscular dystrophy",
+        "autosomal dominant limb-girdle muscular dystrophy caused by mutation in LMNA",
+        "autosomal dominant limb-girdle muscular dystrophy type 1B",
+        "benign scapuloperoneal muscular dystrophy with cardiomyopathy",
+        "limb-girdle muscular dystrophy due to lamin A/C deficiency",
+        "limb-girdle muscular dystrophy type 1B",
+        "muscular dystrophy with early contractures and cardiomyopathy, autosomal dominant",
+        "muscular dystrophy, limb-girdle type 1B",
+        "muscular dystrophy, limb-girdle, type 1B",
+        "muscular dystrophy, proximal, type 1B",
+        "proximal muscular dystrophy type 1B",
+        "scapuloilioperoneal atrophy with cardiopathy"
+      ],
+      "description": "Emery-Dreifuss muscular dystrophy inherited in an autosomal dominant pattern and caused by mutations in the LMNA gene."
+    },
+    {
+      "id": "MONDO:1011798",
+      "name": "forelimb-girdle muscular anomaly, non-human animal",
+      "synonyms": null,
+      "description": null
+    },
+    {
+      "id": "MONDO:0015152",
+      "name": "autosomal recessive limb-girdle muscular dystrophy",
+      "synonyms": [
+        "autosomal recessive limb-girdle muscular dystrophy",
+        "limb-girdle muscular dystrophy, autosomal recessive",
+        "muscular dystrophy, limb-girdle, autosomal recessive"
+      ],
+      "description": "Autosomal recessive form of limb-girdle muscular dystrophy."
+    },
+    {
+      "id": "MONDO:0008178",
+      "name": "inclusion body myopathy with Paget disease of bone and frontotemporal dementia type 1",
+      "synonyms": [
+        "IBMPFD1",
+        "inclusion body myopathy with early-onset Paget disease with or without frontotemporal dementia 1",
+        "inclusion body myopathy with early-onset Paget disease with or without frontotemporal dementia type 1",
+        "inclusion body myopathy with early-onset paget disease and frontotemporal dementia 1",
+        "lower motor neuron degeneration with Paget-like bone disease",
+        "multisystem proteinopathy 1",
+        "muscular dystrophy, limb-girdle, with Paget disease of bone",
+        "pagetoid amyotrophic lateral sclerosis"
+      ],
+      "description": "A rare autosomal dominant inherited disorder caused by mutations in the VCP gene. It can affect the muscles, bones, and brain. Patients may develop myopathy that initially involves the muscles of the hips and shoulders and as the disorder progresses it may affect the cardiac and respiratory muscles, leading to life-threatening cardiac and pulmonary failure. Approximately half of the adults develop Paget disease of bone, and approximately one-third develop frontotemporal dementia."
+    },
+    {
+      "id": "MONDO:0011076",
+      "name": "myofibrillar myopathy 1",
+      "synonyms": [
+        "CMD1F and LGMD1D",
+        "CMD1F and LGMD1D, formerly",
+        "DES autosomal recessive limb-girdle muscular dystrophy",
+        "DES myofibrillar myopathy (disease)",
+        "IBM1",
+        "MFM1",
+        "arrhythmogenic right ventricular cardiomyopathy 7",
+        "arrhythmogenic right ventricular cardiomyopathy 7, formerly",
+        "arrhythmogenic right ventricular dysplasia, familial, 7",
+        "arrhythmogenic right ventricular dysplasia, familial, 7, formerly",
+        "autosomal recessive limb-girdle muscular dystrophy caused by mutation in DES",
+        "autosomal recessive limb-girdle muscular dystrophy type 2R",
+        "cardiomyopathy, dilated, 1F and limb-girdle muscular dystrophy type 1D",
+        "cardiomyopathy, dilated, 1F and limb-girdle muscular dystrophy type 1D, formerly",
+        "cardiomyopathy, dilated, with conduction defect and muscular dystrophy",
+        "desmin-related myofibrillar myopathy",
+        "desmin-related myopathy",
+        "desmin-related myopathy with arrhythmogenic right ventricular cardiomyopathy",
+        "desminopathy",
+        "desminopathy, primary",
+        "inclusion body myopathy 1, autosomal dominant",
+        "inclusion body myopathy 1, autosomal dominant, formerly",
+        "myofibrillar myopathy (disease) caused by mutation in DES",
+        "myofibrillar myopathy 1",
+        "myofibrillar myopathy type 1",
+        "myofibrillar myopathy with arrhythmogenic right ventricular cardiomyopathy",
+        "myopathy, myofibrillar, 1",
+        "myopathy, myofibrillar, desmin-related",
+        "myopathy, myofibrillar, type 1"
+      ],
+      "description": "A rare genetic skeletal muscle disease characterized by abnormal chimeric aggregates of desmin and other cytoskeletal proteins and granulofilamentous material at the ultrastructural level in muscle biopsies and variable clinical/ myopathological features, age of disease onset and rate of disease progression. Patients present with bilateral skeletal muscle weakness that starts in distal leg muscles and spreads proximally, sometimes involving trunk, neck flexors and facial muscles and often cardiomyopathy manifested by conduction blocks, arrhythmias, chronic heart failure, and sometimes tachyarrhythmia. Weakness eventually leads to wheelchair dependence. Respiratory insufficiency can be a major cause of disability and death, beginning with nocturnal hyperventilation with oxygen desaturation and progressing to daytime respiratory failure."
+    },
+    {
+      "id": "MONDO:0012034",
+      "name": "autosomal dominant limb-girdle muscular dystrophy type 1F",
+      "synonyms": [
+        "LGMD1F",
+        "limb-girdle muscular dystrophy type 1F",
+        "muscular dystrophy limb-girdle type 1F",
+        "muscular dystrophy, limb-girdle, autosomal dominant 2",
+        "muscular dystrophy, limb-girdle, type 1F"
+      ],
+      "description": "Autosomal dominant limb-girdle muscular dystrophy type 1F (LGMD1F) is a subtype of autosomal dominant limb-girdle muscular dystrophy,with a variable age of onset, characterized by progressive, proximal weakness and wasting of the shoulder and pelvic musculature (with the pelvic girdle, and especially the ileopsoas muscle, being more affected) and frequent association of calf hypertrophy, dysphagia, arachnodactyly with or without finger contractures and/or distal and axial muscle involvement. Additional features include an abnormal gait, exercise intolerance, myalgia, fatigue and respiratory insufficiency. Cardiac conduction defects are typically not observed."
+    },
+    {
+      "id": "MONDO:0012193",
+      "name": "autosomal dominant limb-girdle muscular dystrophy type 1G",
+      "synonyms": [
+        "HNRNPDL autosomal dominant limb-girdle muscular dystrophy",
+        "LGMD1G",
+        "autosomal dominant limb-girdle muscular dystrophy caused by mutation in HNRNPDL",
+        "limb-girdle muscular dystrophy type 1G",
+        "limb-girdle muscular dystrophy, type 1G",
+        "muscular dystrophy limb-girdle type 1G",
+        "muscular dystrophy, limb-girdle, autosomal dominant 3"
+      ],
+      "description": "Autosomal dominant limb-girdle muscular dystrophy (LGMD1G) is a mild subtype of autosomal dominant limb-girdle muscular dystrophy characterized by a typically adult onset of mild, progressive, proximal weakness of pelvic and shoulder girdle muscles and progressive, permanent finger and toes flexion limitation without flexion contractures. Normal to highly elevated creatine kinase serum levels are observed."
+    },
+    {
+      "id": "MONDO:0018098",
+      "name": "autosomal dominant limb-girdle muscular dystrophy type 1E (DES)",
+      "synonyms": [
+        "LGMD1E",
+        "limb-girdle muscular dystrophy type 1E"
+      ],
+      "description": "Autosomal dominant limb-girdle muscular dystrophy type 1E (LGMD1E) is a subtype of autosomal dominant limb-girdle muscular dystrophy characterized by an adult onset of progressive cardiac conduction defects that begin with cardiac dysrhythmia. Congestive heart failure and symptoms of progressive muscle weakness (present in a proximal distribution) tend to occur later. Affected patients may present only the cardiac features of the disease. Additional features include exertional dyspnea, calf hypertrophy, elevated creatine kinase serum levels and muscle cytoplasmic inclusions."
+    }
+  ],
+  "dmd_detail": {
+    "disease": {
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0010679",
+      "synonym": [
+        "DMD",
+        "Duchenne muscular dystrophy",
+        "Duchenne muscular dystrophy, X-linked recessive",
+        "muscular dystrophy, Duchenne",
+        "muscular dystrophy, Duchenne type",
+        "muscular dystrophy, pseudohypertrophic progressive, Duchenne type",
+        "severe dystrophinopathy, Duchenne type"
+      ],
+      "xref": [
+        "DOID:11723",
+        "GARD:6291",
+        "MEDGEN:3925",
+        "MESH:D020388",
+        "MedDRA:10013801",
+        "NANDO:1200488",
+        "NANDO:2200856",
+        "NCIT:C75482",
+        "NORD:1065",
+        "OMIM:310200",
+        "Orphanet:98896",
+        "SCTID:76670001",
+        "UMLS:C0013264",
+        "icd11.foundation:1479561744"
+      ],
+      "name": "Duchenne muscular dystrophy",
+      "namespace": "MONDO",
+      "description": "Duchenne muscular dystrophy (DMD) is a neuromuscular disease characterized by rapidly progressive muscle weakness and wasting due to degeneration of skeletal, smooth and cardiac muscle.",
+      "provided_by": "phenio_nodes",
+      "id": "MONDO:0010679",
+      "exact_synonym": [
+        "DMD",
+        "Duchenne muscular dystrophy",
+        "Duchenne muscular dystrophy, X-linked recessive",
+        "muscular dystrophy, Duchenne",
+        "severe dystrophinopathy, Duchenne type"
+      ],
+      "category": [
+        "biolink:Disease",
+        "biolink:DiseaseOrPhenotypicFeature",
+        "biolink:BiologicalEntity",
+        "biolink:ThingWithTaxon",
+        "biolink:NamedThing",
+        "biolink:Entity"
+      ],
+      "related_synonym": [
+        "muscular dystrophy, Duchenne type",
+        "muscular dystrophy, pseudohypertrophic progressive, Duchenne type"
+      ],
+      "subsets": [
+        "gard_rare",
+        "nord_rare",
+        "ordo_disorder",
+        "orphanet_rare",
+        "otar",
+        "rare"
+      ]
+    },
+    "genes": [
+      {
+        "gene_id": "HGNC:2928",
+        "symbol": "DMD",
+        "name": "DMD",
+        "relationship": "biolink:causes"
+      },
+      {
+        "gene_id": "HGNC:2928",
+        "symbol": "DMD",
+        "name": "DMD",
+        "relationship": "biolink:gene_associated_with_condition"
+      },
+      {
+        "gene_id": "HGNC:6717",
+        "symbol": "LTBP4",
+        "name": "LTBP4",
+        "relationship": "biolink:gene_associated_with_condition"
+      }
+    ],
+    "phenotypes": [
+      {
+        "phenotype_id": "HP:0003115",
+        "phenotype_name": "Abnormal EKG"
+      },
+      {
+        "phenotype_id": "HP:0001771",
+        "phenotype_name": "Achilles tendon contracture"
+      },
+      {
+        "phenotype_id": "HP:0011675",
+        "phenotype_name": "Arrhythmia"
+      },
+      {
+        "phenotype_id": "HP:0008981",
+        "phenotype_name": "Calf muscle hypertrophy"
+      },
+      {
+        "phenotype_id": "HP:0008981",
+        "phenotype_name": "Calf muscle hypertrophy"
+      },
+      {
+        "phenotype_id": "HP:0003707",
+        "phenotype_name": "Calf muscle pseudohypertrophy"
+      },
+      {
+        "phenotype_id": "HP:0001638",
+        "phenotype_name": "Cardiomyopathy"
+      },
+      {
+        "phenotype_id": "HP:0001638",
+        "phenotype_name": "Cardiomyopathy"
+      },
+      {
+        "phenotype_id": "HP:0100543",
+        "phenotype_name": "Cognitive impairment"
+      },
+      {
+        "phenotype_id": "HP:0001635",
+        "phenotype_name": "Congestive heart failure"
+      },
+      {
+        "phenotype_id": "HP:0002194",
+        "phenotype_name": "Delayed gross motor development"
+      },
+      {
+        "phenotype_id": "HP:0000750",
+        "phenotype_name": "Delayed speech and language development"
+      },
+      {
+        "phenotype_id": "HP:0003551",
+        "phenotype_name": "Difficulty climbing stairs"
+      },
+      {
+        "phenotype_id": "HP:0001644",
+        "phenotype_name": "Dilated cardiomyopathy"
+      },
+      {
+        "phenotype_id": "HP:0003236",
+        "phenotype_name": "Elevated circulating creatine kinase concentration"
+      },
+      {
+        "phenotype_id": "HP:0003236",
+        "phenotype_name": "Elevated circulating creatine kinase concentration"
+      },
+      {
+        "phenotype_id": "HP:0001371",
+        "phenotype_name": "Flexion contracture"
+      },
+      {
+        "phenotype_id": "HP:0001371",
+        "phenotype_name": "Flexion contracture"
+      },
+      {
+        "phenotype_id": "HP:0001263",
+        "phenotype_name": "Global developmental delay"
+      },
+      {
+        "phenotype_id": "HP:0003391",
+        "phenotype_name": "Gowers sign"
+      }
+    ],
+    "inheritance": [
+      {
+        "phenotype_id": "HP:0001419",
+        "phenotype_name": "X-linked recessive inheritance"
+      }
+    ]
+  },
+  "bmd_detail": {
+    "disease": {
+      "iri": "http://purl.obolibrary.org/obo/MONDO_0010311",
+      "synonym": [
+        "BMD",
+        "Becker dystrophinopathy",
+        "Becker muscular dystrophy",
+        "Becker muscular dystrophy, X-linked recessive",
+        "Becker's muscular dystrophy",
+        "benign congenital myopathy",
+        "benign pseudohypertrophic muscular dystrophy",
+        "muscular dystrophy pseudohypertrophic progressive, Becker type",
+        "muscular dystrophy, Becker type",
+        "muscular dystrophy, pseudohypertrophic progressive, Becker type"
+      ],
+      "xref": [
+        "DOID:9883",
+        "GARD:5900",
+        "MEDGEN:182959",
+        "MESH:C570377",
+        "MedDRA:10059117",
+        "NANDO:1200489",
+        "NANDO:2200865",
+        "NCIT:C84587",
+        "OMIM:300376",
+        "Orphanet:98895",
+        "SCTID:387732009",
+        "UMLS:C0917713",
+        "icd11.foundation:690532643"
+      ],
+      "name": "Becker muscular dystrophy",
+      "namespace": "MONDO",
+      "description": "Becker muscular dystrophy (BMD) is a neuromuscular disease characterized by progressive muscle wasting and weakness due to degeneration of skeletal, smooth and cardiac muscle.",
+      "provided_by": "phenio_nodes",
+      "id": "MONDO:0010311",
+      "exact_synonym": [
+        "BMD",
+        "Becker dystrophinopathy",
+        "Becker muscular dystrophy",
+        "Becker muscular dystrophy, X-linked recessive",
+        "benign congenital myopathy",
+        "benign pseudohypertrophic muscular dystrophy"
+      ],
+      "category": [
+        "biolink:Disease",
+        "biolink:DiseaseOrPhenotypicFeature",
+        "biolink:BiologicalEntity",
+        "biolink:ThingWithTaxon",
+        "biolink:NamedThing",
+        "biolink:Entity"
+      ],
+      "related_synonym": [
+        "Becker's muscular dystrophy",
+        "muscular dystrophy pseudohypertrophic progressive, Becker type",
+        "muscular dystrophy, Becker type",
+        "muscular dystrophy, pseudohypertrophic progressive, Becker type"
+      ],
+      "subsets": [
+        "gard_rare",
+        "nord_rare",
+        "ordo_disorder",
+        "orphanet_rare",
+        "otar",
+        "rare"
+      ]
+    },
+    "genes": [
+      {
+        "gene_id": "HGNC:2928",
+        "symbol": "DMD",
+        "name": "DMD",
+        "relationship": "biolink:causes"
+      },
+      {
+        "gene_id": "HGNC:2928",
+        "symbol": "DMD",
+        "name": "DMD",
+        "relationship": "biolink:gene_associated_with_condition"
+      }
+    ],
+    "phenotypes": [
+      {
+        "phenotype_id": "HP:0003115",
+        "phenotype_name": "Abnormal EKG"
+      },
+      {
+        "phenotype_id": "HP:0012086",
+        "phenotype_name": "Abnormal urinary color"
+      },
+      {
+        "phenotype_id": "HP:0002814",
+        "phenotype_name": "Abnormality of the lower limb"
+      },
+      {
+        "phenotype_id": "HP:0011675",
+        "phenotype_name": "Arrhythmia"
+      },
+      {
+        "phenotype_id": "HP:0003707",
+        "phenotype_name": "Calf muscle pseudohypertrophy"
+      },
+      {
+        "phenotype_id": "HP:0001638",
+        "phenotype_name": "Cardiomyopathy"
+      },
+      {
+        "phenotype_id": "HP:0003551",
+        "phenotype_name": "Difficulty climbing stairs"
+      },
+      {
+        "phenotype_id": "HP:0003236",
+        "phenotype_name": "Elevated circulating creatine kinase concentration"
+      },
+      {
+        "phenotype_id": "HP:0003236",
+        "phenotype_name": "Elevated circulating creatine kinase concentration"
+      },
+      {
+        "phenotype_id": "HP:0002910",
+        "phenotype_name": "Elevated circulating hepatic transaminase concentration"
+      },
+      {
+        "phenotype_id": "HP:0003546",
+        "phenotype_name": "Exercise intolerance"
+      },
+      {
+        "phenotype_id": "HP:0002527",
+        "phenotype_name": "Falls"
+      },
+      {
+        "phenotype_id": "HP:0012378",
+        "phenotype_name": "Fatigue"
+      },
+      {
+        "phenotype_id": "HP:0001288",
+        "phenotype_name": "Gait disturbance"
+      },
+      {
+        "phenotype_id": "HP:0001265",
+        "phenotype_name": "Hyporeflexia"
+      },
+      {
+        "phenotype_id": "HP:0003394",
+        "phenotype_name": "Muscle spasm"
+      },
+      {
+        "phenotype_id": "HP:0001324",
+        "phenotype_name": "Muscle weakness"
+      },
+      {
+        "phenotype_id": "HP:0001324",
+        "phenotype_name": "Muscle weakness"
+      },
+      {
+        "phenotype_id": "HP:0003560",
+        "phenotype_name": "Muscular dystrophy"
+      },
+      {
+        "phenotype_id": "HP:0003326",
+        "phenotype_name": "Myalgia"
+      }
+    ],
+    "inheritance": [
+      {
+        "phenotype_id": "HP:0001419",
+        "phenotype_name": "X-linked recessive inheritance"
+      }
+    ]
+  },
+  "dmd_gene": {
+    "gene": {
+      "in_taxon_label": "Homo sapiens",
+      "symbol": "DMD",
+      "synonym": [
+        "BMD",
+        "DXS142",
+        "DXS164",
+        "DXS206",
+        "DXS230",
+        "DXS239",
+        "DXS268",
+        "DXS269",
+        "DXS270",
+        "DXS272",
+        "muscular dystrophy, Duchenne and Becker types",
+        "MRX85",
+        "dystrophin (muscular dystrophy, Duchenne and Becker types), includes DXS142, DXS164, DXS206, DXS230, DXS239, DXS268, DXS269, DXS270, DXS272",
+        "mental retardation, X-linked 85"
+      ],
+      "xref": [
+        "ENSEMBL:ENSG00000198947",
+        "OMIM:300377"
+      ],
+      "full_name": "dystrophin",
+      "in_taxon": "NCBITaxon:9606",
+      "name": "DMD",
+      "namespace": "HGNC",
+      "provided_by": "hgnc_gene_nodes",
+      "id": "HGNC:2928",
+      "category": [
+        "biolink:Gene",
+        "biolink:GeneOrGeneProduct",
+        "biolink:GenomicEntity",
+        "biolink:ChemicalEntityOrGeneOrGeneProduct",
+        "biolink:PhysicalEssence",
+        "biolink:OntologyClass",
+        "biolink:BiologicalEntity",
+        "biolink:ThingWithTaxon",
+        "biolink:NamedThing",
+        "biolink:Entity",
+        "biolink:PhysicalEssenceOrOccurrent",
+        "biolink:MacromolecularMachineMixin"
+      ],
+      "type": "SO:0001217"
+    },
+    "diseases": [
+      {
+        "disease_id": "MONDO:0010311",
+        "disease_name": "Becker muscular dystrophy",
+        "relationship": "biolink:causes"
+      },
+      {
+        "disease_id": "MONDO:0010311",
+        "disease_name": "Becker muscular dystrophy",
+        "relationship": "biolink:gene_associated_with_condition"
+      },
+      {
+        "disease_id": "MONDO:0010679",
+        "disease_name": "Duchenne muscular dystrophy",
+        "relationship": "biolink:causes"
+      },
+      {
+        "disease_id": "MONDO:0010679",
+        "disease_name": "Duchenne muscular dystrophy",
+        "relationship": "biolink:gene_associated_with_condition"
+      },
+      {
+        "disease_id": "MONDO:0010542",
+        "disease_name": "dilated cardiomyopathy 3B",
+        "relationship": "biolink:causes"
+      },
+      {
+        "disease_id": "MONDO:0700335",
+        "disease_name": "familial isolated dilated cardiomyopathy",
+        "relationship": "biolink:gene_associated_with_condition"
+      },
+      {
+        "disease_id": "MONDO:0019181",
+        "disease_name": "non-syndromic X-linked intellectual disability",
+        "relationship": "biolink:gene_associated_with_condition"
+      },
+      {
+        "disease_id": "MONDO:0016097",
+        "disease_name": "symptomatic form of muscular dystrophy of Duchenne and Becker in female carriers",
+        "relationship": "biolink:gene_associated_with_condition"
+      }
+    ],
+    "variants": []
+  },
+  "lama2_gene": {
+    "gene": {
+      "in_taxon_label": "Homo sapiens",
+      "symbol": "LAMA2",
+      "synonym": [
+        "merosin",
+        "congenital muscular dystrophy",
+        "LAMM",
+        "laminin, alpha 2"
+      ],
+      "xref": [
+        "ENSEMBL:ENSG00000196569",
+        "OMIM:156225"
+      ],
+      "full_name": "laminin subunit alpha 2",
+      "in_taxon": "NCBITaxon:9606",
+      "name": "LAMA2",
+      "namespace": "HGNC",
+      "provided_by": "hgnc_gene_nodes",
+      "id": "HGNC:6482",
+      "category": [
+        "biolink:Gene",
+        "biolink:GeneOrGeneProduct",
+        "biolink:GenomicEntity",
+        "biolink:ChemicalEntityOrGeneOrGeneProduct",
+        "biolink:PhysicalEssence",
+        "biolink:OntologyClass",
+        "biolink:BiologicalEntity",
+        "biolink:ThingWithTaxon",
+        "biolink:NamedThing",
+        "biolink:Entity",
+        "biolink:PhysicalEssenceOrOccurrent",
+        "biolink:MacromolecularMachineMixin"
+      ],
+      "type": "SO:0001217"
+    },
+    "diseases": [
+      {
+        "disease_id": "MONDO:0011925",
+        "disease_name": "congenital merosin-deficient muscular dystrophy 1A",
+        "relationship": "biolink:causes"
+      },
+      {
+        "disease_id": "MONDO:0011925",
+        "disease_name": "congenital merosin-deficient muscular dystrophy 1A",
+        "relationship": "biolink:gene_associated_with_condition"
+      },
+      {
+        "disease_id": "MONDO:0029136",
+        "disease_name": "muscular dystrophy, limb-girdle, autosomal recessive 23",
+        "relationship": "biolink:causes"
+      }
+    ],
+    "variants": []
+  },
+  "dmd_bmd_overlap": [
+    {
+      "phenotype_id": "HP:0003115",
+      "phenotype_name": "Abnormal EKG"
+    },
+    {
+      "phenotype_id": "HP:0011675",
+      "phenotype_name": "Arrhythmia"
+    },
+    {
+      "phenotype_id": "HP:0003707",
+      "phenotype_name": "Calf muscle pseudohypertrophy"
+    },
+    {
+      "phenotype_id": "HP:0001638",
+      "phenotype_name": "Cardiomyopathy"
+    },
+    {
+      "phenotype_id": "HP:0001638",
+      "phenotype_name": "Cardiomyopathy"
+    },
+    {
+      "phenotype_id": "HP:0003551",
+      "phenotype_name": "Difficulty climbing stairs"
+    },
+    {
+      "phenotype_id": "HP:0003236",
+      "phenotype_name": "Elevated circulating creatine kinase concentration"
+    },
+    {
+      "phenotype_id": "HP:0003236",
+      "phenotype_name": "Elevated circulating creatine kinase concentration"
+    },
+    {
+      "phenotype_id": "HP:0003236",
+      "phenotype_name": "Elevated circulating creatine kinase concentration"
+    },
+    {
+      "phenotype_id": "HP:0003236",
+      "phenotype_name": "Elevated circulating creatine kinase concentration"
+    },
+    {
+      "phenotype_id": "HP:0001265",
+      "phenotype_name": "Hyporeflexia"
+    },
+    {
+      "phenotype_id": "HP:0001324",
+      "phenotype_name": "Muscle weakness"
+    },
+    {
+      "phenotype_id": "HP:0001324",
+      "phenotype_name": "Muscle weakness"
+    },
+    {
+      "phenotype_id": "HP:0003560",
+      "phenotype_name": "Muscular dystrophy"
+    },
+    {
+      "phenotype_id": "HP:0003202",
+      "phenotype_name": "Skeletal muscle atrophy"
+    },
+    {
+      "phenotype_id": "HP:0030051",
+      "phenotype_name": "Tip-toe gait"
+    }
+  ]
+}
